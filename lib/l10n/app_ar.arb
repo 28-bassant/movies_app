@@ -10,7 +10,8 @@
   "genres": "الأنواع",
   "email": "البريد الإلكتروني",
   "password": "كلمة المرور",
-  "forgetPasswordQuestion": "هل نسيت كلمة المرور؟",
+  "forgetPasswordQuestiongit checkout feature/login-ui
+                         git pull origin feature/login-ui": "هل نسيت كلمة المرور؟",
   "forget_password": "نسيت كلمة المرور",
   "or": "أو",
   "login_with_google": "تسجيل الدخول باستخدام جوجل",
