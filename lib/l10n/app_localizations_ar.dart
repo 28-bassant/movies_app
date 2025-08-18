@@ -109,4 +109,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get explore_now => 'استكشف الآن';
+
+  @override
+  String get avatar => 'الصورة الرمزية';
+
+  @override
+  String get please_enter_name => 'الرجاء إدخال الاسم';
+
+  @override
+  String get please_enter_email => 'الرجاء إدخال البريد الالكتروني';
+
+  @override
+  String get please_enter_phone_number => 'الرجاء إدخال الرقم المحمول';
+
+  @override
+  String get please_enter_password => 'الرجاء إدخال كلمة المرور';
+
+  @override
+  String get please_confirm_password => 'الرجاء تأكيد كلمة المرور';
 }

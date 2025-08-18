@@ -5,6 +5,7 @@ import 'package:movies_app/providers/app-language-provider.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
+import 'UI/auth/register/register_screen.dart';
 import 'l10n/app_localizations.dart';
 
 void main(){
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget{
         initialRoute: AppRoutes.loginRouteName,
         routes: {
           AppRoutes.loginRouteName: (context) => LoginScreen(),
+          AppRoutes.registerRouteName: (context) =>RegisterScreen(),
         },
 
 

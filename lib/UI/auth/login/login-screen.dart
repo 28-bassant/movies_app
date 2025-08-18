@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
+import 'package:movies_app/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/app-language-provider.dart';
@@ -103,7 +104,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             children: [
                               Text(AppLocalizations.of(context)!.no_account,
                                   style:AppStyles.regular14White)
-                              ,TextButton(onPressed: (){},
+                              ,TextButton(onPressed: (){
+                                //todo : Navigate to Register Screen
+                                Navigator.pushNamedAndRemoveUntil(context, AppRoutes.registerRouteName, (route) => true,);
+
+                              },
                                   child: Text(AppLocalizations.of(context)!.create_one,style:AppStyles.black14Orange))
                             ])
                         , SizedBox(height: height*.01,)

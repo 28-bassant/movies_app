@@ -109,4 +109,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get explore_now => 'Explore Now';
+
+  @override
+  String get avatar => 'Avatar';
+
+  @override
+  String get please_enter_name => 'Please Enter Name';
+
+  @override
+  String get please_enter_email => 'Please Enter Email';
+
+  @override
+  String get please_enter_phone_number => 'Please Enter Phone Number';
+
+  @override
+  String get please_enter_password => 'Please Enter Password';
+
+  @override
+  String get please_confirm_password => 'Please Confirm Password';
 }
