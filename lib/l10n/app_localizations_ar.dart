@@ -51,7 +51,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get or => 'أو';
 
   @override
-  String get loginWithGoogle => 'Login With Google';
+  String get loginWithGoogle => 'تسجيل الدخول عبر جوجل';
 
   @override
   String get name => 'الاسم';
@@ -88,4 +88,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get updateData => 'Update Data';
+
+  @override
+  String get enter_email => 'ادخل البريد الإلكتروني';
+
+  @override
+  String get valid_email => 'ادخل بريد إلكتروني صحيح';
+
+  @override
+  String get enter_password => 'ادخل كلمة المرور';
+
+  @override
+  String get valid_password => 'ادخل كلمة مرور صحيحة';
+
+  @override
+  String get no_account => 'لا تمتلك حساب؟';
+
+  @override
+  String get create_one => 'انشئ واحد';
+
+  @override
+  String get explore_now => 'استكشف الآن';
 }

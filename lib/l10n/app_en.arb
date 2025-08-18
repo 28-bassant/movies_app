@@ -25,5 +25,15 @@
   "wishList": "Wish List",
   "history": "History",
   "deleteAccount": "Delete Account",
-  "updateData": "Update Data"
+  "updateData": "Update Data",
+  "enter_email": "Enter Email",
+    "valid_email": "Enter valid email",
+    "enter_password": "Enter Password",
+    "valid_password": "Enter valid password",
+    "or": "OR",
+    "no_account": "Don't Have Account ?",
+    "create_one": "Create one",
+    "login": "Login",
+    "explore_now": "Explore Now",
+    "next": "Next"
 }

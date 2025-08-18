@@ -88,4 +88,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get updateData => 'Update Data';
+
+  @override
+  String get enter_email => 'Enter Email';
+
+  @override
+  String get valid_email => 'Enter valid email';
+
+  @override
+  String get enter_password => 'Enter Password';
+
+  @override
+  String get valid_password => 'Enter valid password';
+
+  @override
+  String get no_account => 'Don\'t Have Account ?';
+
+  @override
+  String get create_one => 'Create one';
+
+  @override
+  String get explore_now => 'Explore Now';
 }

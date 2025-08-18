@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:movies_app/UI/auth/login/login-screen.dart';
 import 'package:movies_app/providers/app-language-provider.dart';
+import 'package:movies_app/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
 import 'l10n/app_localizations.dart';
 
 void main(){
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => LanguageProvider(),
+      child: MyApp(),
+
+  ));
 }
 class MyApp extends StatelessWidget{
   @override
@@ -14,11 +21,17 @@ class MyApp extends StatelessWidget{
     var languageProvider = Provider.of<LanguageProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+        initialRoute: AppRoutes.loginRouteName,
+        routes: {
+          AppRoutes.loginRouteName: (context) => LoginScreen(),
+        },
+
 
       locale: Locale(languageProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
 
     );
+
   }
 }

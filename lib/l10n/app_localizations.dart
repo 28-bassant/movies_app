@@ -259,6 +259,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update Data'**
   String get updateData;
+
+  /// No description provided for @enter_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Email'**
+  String get enter_email;
+
+  /// No description provided for @valid_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter valid email'**
+  String get valid_email;
+
+  /// No description provided for @enter_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Password'**
+  String get enter_password;
+
+  /// No description provided for @valid_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter valid password'**
+  String get valid_password;
+
+  /// No description provided for @no_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t Have Account ?'**
+  String get no_account;
+
+  /// No description provided for @create_one.
+  ///
+  /// In en, this message translates to:
+  /// **'Create one'**
+  String get create_one;
+
+  /// No description provided for @explore_now.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Now'**
+  String get explore_now;
 }
 
 class _AppLocalizationsDelegate

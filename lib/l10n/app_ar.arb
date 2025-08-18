@@ -25,5 +25,18 @@
   "wish_list": "قائمة الرغبات",
   "history": "السجل",
   "delete_account": "حذف الحساب",
-  "update_data": "تحديث البيانات"
+  "update_data": "تحديث البيانات",
+  "enter_email": "ادخل البريد الإلكتروني",
+    "valid_email": "ادخل بريد إلكتروني صحيح",
+    "enter_password": "ادخل كلمة المرور",
+    "valid_password": "ادخل كلمة مرور صحيحة",
+    "or": "أو",
+    "no_account": "لا تمتلك حساب؟",
+    "create_one": "انشئ واحد",
+    "login": "تسجيل الدخول",
+    "explore_now": "استكشف الآن",
+    "next": "التالي",
+
+      "loginWithGoogle": "تسجيل الدخول عبر جوجل"
+
 }

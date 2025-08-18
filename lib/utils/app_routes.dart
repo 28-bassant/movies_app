@@ -1,3 +1,3 @@
-class AppRoutes{
-
+class AppRoutes {
+static const String loginRouteName = 'login';
 }
