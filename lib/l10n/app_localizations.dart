@@ -301,6 +301,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Explore Now'**
   String get explore_now;
+
+  /// No description provided for @avatar.
+  ///
+  /// In en, this message translates to:
+  /// **'Avatar'**
+  String get avatar;
+
+  /// No description provided for @please_enter_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Name'**
+  String get please_enter_name;
+
+  /// No description provided for @please_enter_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Email'**
+  String get please_enter_email;
+
+  /// No description provided for @please_enter_phone_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Phone Number'**
+  String get please_enter_phone_number;
+
+  /// No description provided for @please_enter_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Password'**
+  String get please_enter_password;
+
+  /// No description provided for @please_confirm_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Confirm Password'**
+  String get please_confirm_password;
 }
 
 class _AppLocalizationsDelegate
