@@ -1,12 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
+import '../../../api/api-manager.dart';
+import '../../../app-prefrences/token-storage.dart';
 import '../../../providers/app-language-provider.dart';
 import '../../../utils/app_assets.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_styles.dart';
+import '../../../utils/dialog-utils.dart';
 import '../widgets/custom-elevated-button.dart';
 import '../widgets/custom-text-form-field.dart';
 class LoginScreen extends StatefulWidget {
@@ -19,11 +25,13 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   var formKey = GlobalKey<FormState>();
 
-  TextEditingController emailController =TextEditingController( );
+  TextEditingController emailController =TextEditingController(text: "amr2@gmail.com ");
 
-  TextEditingController passwordController =TextEditingController();
+  TextEditingController passwordController =TextEditingController(text: "Amr2510@");
 
   bool obscure=true;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -64,12 +72,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(height: height*.02,),
                         CustomTextFormField(hintText:AppLocalizations.of(context)!.password,
                           controller: passwordController,
-                          kerboardType:TextInputType.visiblePassword ,
                           validator: (text){
                             if(text ==null || text.trim().isEmpty){
                               return AppLocalizations.of(context)!.enter_password;
                             }
-                            if(text.length<6){
+                            if(text.length<8){
                               return AppLocalizations.of(context)!.valid_password;
                             }
                             return null;
@@ -126,7 +133,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: AppColors.orangeColor))
                         ],),
                         SizedBox(height: height*.02,),
-                        CustomElevatedButton(onPressed:(){},
+                        CustomElevatedButton(onPressed:(){
+
+                        },
                             text:AppLocalizations.of(context)!.loginWithGoogle,
                             textStyle: AppStyles.regular16Black,icon: true,iconName: AppAssets.googleIcon)
 
@@ -192,10 +201,68 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-  void login() {
+  void login() async {
     if (formKey.currentState?.validate() == true) {
-      //todo: login
+      final email = emailController.text.trim();
+      final password = passwordController.text.trim();
 
+      try {
+        //todo:show loading
+        DialogUtils.showLopading(
+            textLoading: "Logging in...", context: context);
+
+        final response = await ApiManager.login(email, password);
+        //todo:hide loading
+        DialogUtils.hideLoading(context: context);
+
+        if (response.message == "Success Login") {
+            if (response.token != null) {
+              await TokenStorage.saveToken(response.token!);
+            }
+            //todo:success
+          //todo:show msg
+          DialogUtils.showMsg(
+              context: context,
+              title: "Success",
+              msg: "Login Successful",
+              posActionName: "OK",
+              posAction: () {
+                //todo:navigate to home
+              }
+          );
+        } else {
+          //todo:server error
+          //todo:show msg
+          DialogUtils.showMsg(
+            context: context,
+            title: "Login Failed",
+            msg: response.message,
+            posActionName: "Ok",
+          );
+        }
+      }
+      //todo:client error
+        on SocketException {
+          DialogUtils.hideLoading(context: context);
+          DialogUtils.showMsg(
+            context: context,
+            title: "No Internet",
+            msg: "Please check your internet connection and try again.",
+            posActionName: "Retry",
+          );
+        } catch (e) {
+        //todo:hide loading
+        DialogUtils.hideLoading(context: context);
+        //todo:show msg
+        DialogUtils.showMsg(
+          context: context,
+          title: "Login Failed ",
+          msg: e.toString().replaceFirst("Exception:", "").trim(),
+          posActionName: "Ok",
+        );
+      }
     }
+
   }
+
 }
