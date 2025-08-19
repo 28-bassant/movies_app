@@ -19,4 +19,5 @@ class AppAssets {
   static const String updateAvatar7 = 'assets/images/update_avatar7.png';
   static const String updateAvatar8 = 'assets/images/update_avatar8.png';
   static const String updateAvatar9 = 'assets/images/update_avatar9.png';
+  static const String forgetPasswordImage = 'assets/images/forgetPassword.png';
 }
