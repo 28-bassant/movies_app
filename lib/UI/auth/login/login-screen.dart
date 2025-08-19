@@ -25,13 +25,15 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   var formKey = GlobalKey<FormState>();
 
-  TextEditingController emailController =TextEditingController(text: "amr2@gmail.com ");
+  TextEditingController emailController =TextEditingController();
 
-  TextEditingController passwordController =TextEditingController(text: "Amr2510@");
+  TextEditingController passwordController =TextEditingController();
 
   bool obscure=true;
 
-
+  final GoogleSignIn googleSignIn = GoogleSignIn(
+    scopes: ['email'],
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],),
                         SizedBox(height: height*.02,),
                         CustomElevatedButton(onPressed:(){
-
+                          loginWithGoogle(context);
                         },
                             text:AppLocalizations.of(context)!.loginWithGoogle,
                             textStyle: AppStyles.regular16Black,icon: true,iconName: AppAssets.googleIcon)
@@ -264,5 +266,38 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
   }
+  Future loginWithGoogle(BuildContext context) async {
+    try {
+      final account = await googleSignIn.signIn();
+      if (account != null) {
+        DialogUtils.showMsg(
+          context: context,
+          title: "Success",
+          msg: "Welcome, ${account.displayName}",
+          posActionName: "OK",
+          posAction: () {
+            // TODO: Navigate to home
 
+          },
+        );
+        debugPrint("User Email: ${account.email}");
+        debugPrint("User Name: ${account.displayName}");
+        debugPrint("User ID: ${account.id}");
+      } else {
+        DialogUtils.showMsg(
+          context: context,
+          title: "Cancelled",
+          msg: "Google login was cancelled",
+          posActionName: "OK",
+        );
+      }
+    } catch (e) {
+      DialogUtils.showMsg(
+        context: context,
+        title: "Error",
+        msg: "Google login failed: $e",
+        posActionName: "OK",
+      );
+    }
+  }
 }
