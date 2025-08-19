@@ -69,7 +69,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         AssetImage(AppAssets.nameIcon),
                         color: AppColors.whiteColor,
                       ),
-                      kerboardType: TextInputType.text,
+                      keyboardType: TextInputType.text,
                       controller: nameController,
                       validator: (text) {
                         if (text == null || text.trim().isEmpty) {
@@ -83,7 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       hintText: AppLocalizations.of(context)!.email,
                       prefixIcon: Image(image: AssetImage(AppAssets.emailIcon)),
                       controller: emailController,
-                      kerboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.emailAddress,
                       validator: (text) {
                         if (text == null || text.trim().isEmpty) {
                           return AppLocalizations.of(context)!.please_enter_email;
@@ -102,7 +102,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     CustomTextFormField(
                       hintText: AppLocalizations.of(context)!.password,
                       controller: passwordController,
-                      kerboardType: TextInputType.visiblePassword,
+                      keyboardType: TextInputType.visiblePassword,
                       validator: (text) {
                         if (text == null || text.trim().isEmpty) {
                           return AppLocalizations.of(context)!.please_enter_password;
@@ -131,7 +131,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     CustomTextFormField(
                       hintText: AppLocalizations.of(context)!.confirmPassword,
                       controller: passwordController,
-                      kerboardType: TextInputType.visiblePassword,
+                      keyboardType: TextInputType.visiblePassword,
                       validator: (text) {
                         if (text == null || text.trim().isEmpty) {
                           return AppLocalizations.of(context)!.please_confirm_password;
@@ -163,7 +163,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         AssetImage(AppAssets.phoneIcon),
                         color: AppColors.whiteColor,
                       ),
-                      kerboardType: TextInputType.number,
+                      keyboardType: TextInputType.number,
                       controller: nameController,
                       validator: (text) {
                         if (text == null || text.trim().isEmpty) {
