@@ -87,11 +87,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         )
                         ,Row(mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            TextButton(onPressed: (){}, child:Text(AppLocalizations.of(context)!.forgetPasswordQuestion
+                            TextButton(onPressed: (){
+                              Navigator.pushNamedAndRemoveUntil(context, AppRoutes.forgetPasswordRouteName, (route) => true,);
+                            }, child:Text(AppLocalizations.of(context)!.forgetPasswordQuestion
                               ,style: AppStyles.regular16Orange.copyWith(
                                 fontSize: 14,
+                              ),
 
-                              ),))
+                            ))
                           ],),
                         SizedBox(height: height*.02,),
 
