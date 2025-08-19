@@ -5,4 +5,6 @@ class AppAssets {
   static const String passIcon = 'assets/images/pass-icon.png';
   static const String emailIcon = 'assets/images/email-icon.png';
   static const String logoIcon = 'assets/images/logo.png';
+  static const String forgetPasswordImage = 'assets/images/forgetPassword.png';
+
 }
