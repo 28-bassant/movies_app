@@ -337,6 +337,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please Confirm Password'**
   String get please_confirm_password;
+
+  /// No description provided for @pick_avatar.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick Avatar'**
+  String get pick_avatar;
+
+  /// No description provided for @reset_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get reset_password;
 }
 
 class _AppLocalizationsDelegate

@@ -127,4 +127,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get please_confirm_password => 'Please Confirm Password';
+
+  @override
+  String get pick_avatar => 'Pick Avatar';
+
+  @override
+  String get reset_password => 'Reset Password';
 }
