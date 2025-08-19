@@ -127,4 +127,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get please_confirm_password => 'الرجاء تأكيد كلمة المرور';
+
+  @override
+  String get pick_avatar => 'اختر صورة رمزية';
+
+  @override
+  String get reset_password => 'إعادة تعيين كلمة المرور';
 }

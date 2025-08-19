@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:movies_app/UI/auth/login/login-screen.dart';
+import 'package:movies_app/UI/auth/update/update_screen.dart';
 import 'package:movies_app/providers/app-language-provider.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget{
         routes: {
           AppRoutes.loginRouteName: (context) => LoginScreen(),
           AppRoutes.registerRouteName: (context) =>RegisterScreen(),
+          AppRoutes.updateRouteName: (context) =>UpdateScreen(),
         },
 
 
