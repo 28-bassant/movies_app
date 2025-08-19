@@ -35,5 +35,14 @@
     "create_one": "Create one",
     "login": "Login",
     "explore_now": "Explore Now",
-    "next": "Next"
+    "next": "Next",
+    "avatar": "Avatar",
+    "please_enter_name": "Please Enter Name",
+    "please_enter_email": "Please Enter Email",
+    "please_enter_phone_number": "Please Enter Phone Number",
+    "please_enter_name": "Please Enter Name",
+    "please_enter_password": "Please Enter Password",
+    "please_confirm_password": "Please Confirm Password",
+    "pick_avatar": "Pick Avatar",
+    "reset_password": "Reset Password"
 }

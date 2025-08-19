@@ -16,8 +16,11 @@ class ForgetPasswordScreen extends StatefulWidget {
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
 
+
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     final emailController = TextEditingController();
     return Scaffold(
       backgroundColor: Colors.black,
@@ -48,7 +51,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 SizedBox(
                   child: Image.asset("assets/images/forgotPassword.png"),
                 ),
-                const SizedBox(height: 20),
+                 SizedBox(height:height*.02),
                 CustomTextFormField(
                   keyboardType: TextInputType.emailAddress,
                   hintText: AppLocalizations.of(context)!.email,
@@ -68,7 +71,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height:height*.02),
 
                 CustomElevatedButton(
                   text: AppLocalizations.of(context)!.verifyEmail,

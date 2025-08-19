@@ -32,5 +32,15 @@
   "valid_password": "أدخل كلمة مرور صحيحة",
   "no_account": "ليس لديك حساب؟",
   "create_one": "إنشئ واحدًا",
-  "explore_now": "استكشف الآن"
+  "explore_now": "استكشف الآن",
+  "avatar": "الصورة الرمزية",
+  "please_enter_name": "الرجاء إدخال الاسم",
+  "please_enter_email": "الرجاء إدخال البريد الالكتروني",
+  "please_enter_phone_number": "الرجاء إدخال الرقم المحمول",
+  "please_enter_name": "الرجاء إدخال الاسم",
+   "please_enter_password": "الرجاء إدخال كلمة المرور",
+   "please_confirm_password": "الرجاء تأكيد كلمة المرور",
+   "pick_avatar": "اختر صورة رمزية",
+   "reset_password": "إعادة تعيين كلمة المرور"
+
 }

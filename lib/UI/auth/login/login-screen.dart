@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
+import 'package:movies_app/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/app-language-provider.dart';
 import '../../../utils/app_assets.dart';
@@ -133,51 +134,35 @@ class _LoginScreenState extends State<LoginScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(AppLocalizations.of(context)!.no_account,
-                                  style: AppStyles.regular14White),
-                              TextButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                      AppLocalizations.of(context)!.create_one,
-                                      style: AppStyles.black14Orange))
-                            ]),
-                        SizedBox(
-                          height: height * .01,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                                child: Divider(
-                              indent: width * .05,
-                              endIndent: width * .04,
-                              thickness: 2,
-                              color: AppColors.orangeColor,
-                            )),
-                            Text(
-                              AppLocalizations.of(context)!.or,
-                              style: AppStyles.regular16Orange,
-                            ),
-                            Expanded(
-                                child: Divider(
-                                    thickness: 2,
-                                    indent: width * .04,
-                                    endIndent: width * .06,
-                                    color: AppColors.orangeColor))
-                          ],
-                        ),
-                        SizedBox(
-                          height: height * .02,
-                        ),
-                        CustomElevatedButton(
-                            onPressed: () {},
-                            text: AppLocalizations.of(context)!.loginWithGoogle,
-                            textStyle: AppStyles.regular16Black,
-                            icon: true,
-                            iconName: AppAssets.googleIcon),
-                        SizedBox(
-                          height: height * .04,
-                        ),
-                        Align(
-                          alignment: Alignment.center,
+                                  style:AppStyles.regular14White)
+                              ,TextButton(onPressed: (){
+                                //todo : Navigate to Register Screen
+                                Navigator.pushNamedAndRemoveUntil(context, AppRoutes.registerRouteName, (route) => true,);
+
+                              },
+                                  child: Text(AppLocalizations.of(context)!.create_one,style:AppStyles.black14Orange))
+                            ])
+                        , SizedBox(height: height*.01,)
+                        ,Row(children: [
+                          Expanded(child: Divider(
+                            indent: width*.05,
+                            endIndent:  width*.04,
+                            thickness: 2,
+                            color: AppColors.orangeColor,
+                          )),
+                          Text(AppLocalizations.of(context)!.or,style: AppStyles.regular16Orange,),
+                          Expanded(child: Divider(thickness: 2,
+                            indent: width*.04,
+                            endIndent:  width*.06,
+                            color: AppColors.orangeColor))
+                        ],),
+                        SizedBox(height: height*.02,),
+                        CustomElevatedButton(onPressed:(){},
+                            text:AppLocalizations.of(context)!.loginWithGoogle,
+                            textStyle: AppStyles.regular16Black,icon: true,iconName: AppAssets.googleIcon)
+
+                        ,SizedBox(height: height*.04,)
+                        , Align(alignment: Alignment.center,
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(40),
