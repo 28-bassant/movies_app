@@ -13,6 +13,11 @@ static TextStyle bold20Grey = GoogleFonts.roboto(
   fontSize: 20,
   fontWeight: FontWeight.bold
 );
+static TextStyle bold14Black = GoogleFonts.roboto(
+    color: AppColors.blackBgColor,
+    fontSize: 14,
+    fontWeight: FontWeight.bold
+);
 static TextStyle regular14White = GoogleFonts.roboto(
   color: AppColors.whiteColor,
   fontSize: 14,

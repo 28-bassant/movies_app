@@ -14,7 +14,7 @@ class  CustomTextFormField extends StatelessWidget {
   TextStyle? labelStyle;
   Widget? prefixIcon;
   Widget? suffixIcon;
-  TextInputType? kerboardType;
+  TextInputType? keyboardType;
   OnValidator validator;
   TextEditingController? controller;
   bool? obscureText;
@@ -22,7 +22,7 @@ class  CustomTextFormField extends StatelessWidget {
   int? maxLines;
   CustomTextFormField ({super.key,this.fillColor=AppColors.darkGreyColor,this.borderSideColor=AppColors.darkGreyColor,
     this.prefixIcon,this.suffixIcon,this.hintText,this.hintStyle,
-    this.labelText,this.labelStyle,this.kerboardType,this.validator,
+    this.labelText,this.labelStyle,this.keyboardType,this.validator,
     required this.controller,this.obscureText=false,this.obscuringCharacter,this.maxLines});
 
   @override
@@ -42,7 +42,7 @@ class  CustomTextFormField extends StatelessWidget {
         labelStyle:labelStyle ?? AppStyles.regular16White ,
         prefixIcon:prefixIcon,
         suffixIcon: suffixIcon,
-      ),keyboardType: kerboardType,
+      ),keyboardType: keyboardType,
       validator: validator,
       controller: controller,
       obscureText: obscureText!,
