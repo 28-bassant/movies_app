@@ -1,3 +1,6 @@
-class AppRoutes{
-
+class AppRoutes {
+static const String loginRouteName = 'login';
+static const String onBoardingRouteName = 'onBoarding';
+static const String registerRouteName = 'registerScreen';
+static const String updateRouteName = 'updateScreen';
 }

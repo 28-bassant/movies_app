@@ -259,6 +259,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update Data'**
   String get updateData;
+
+  /// No description provided for @enter_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Email'**
+  String get enter_email;
+
+  /// No description provided for @valid_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter valid email'**
+  String get valid_email;
+
+  /// No description provided for @enter_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Password'**
+  String get enter_password;
+
+  /// No description provided for @valid_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter valid password'**
+  String get valid_password;
+
+  /// No description provided for @no_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t Have Account ?'**
+  String get no_account;
+
+  /// No description provided for @create_one.
+  ///
+  /// In en, this message translates to:
+  /// **'Create one'**
+  String get create_one;
+
+  /// No description provided for @explore_now.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Now'**
+  String get explore_now;
+
+  /// No description provided for @avatar.
+  ///
+  /// In en, this message translates to:
+  /// **'Avatar'**
+  String get avatar;
+
+  /// No description provided for @please_enter_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Name'**
+  String get please_enter_name;
+
+  /// No description provided for @please_enter_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Email'**
+  String get please_enter_email;
+
+  /// No description provided for @please_enter_phone_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Phone Number'**
+  String get please_enter_phone_number;
+
+  /// No description provided for @please_enter_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Password'**
+  String get please_enter_password;
+
+  /// No description provided for @please_confirm_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Confirm Password'**
+  String get please_confirm_password;
+
+  /// No description provided for @pick_avatar.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick Avatar'**
+  String get pick_avatar;
+
+  /// No description provided for @reset_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get reset_password;
 }
 
 class _AppLocalizationsDelegate

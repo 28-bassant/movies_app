@@ -88,4 +88,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get updateData => 'Update Data';
+
+  @override
+  String get enter_email => 'Enter Email';
+
+  @override
+  String get valid_email => 'Enter valid email';
+
+  @override
+  String get enter_password => 'Enter Password';
+
+  @override
+  String get valid_password => 'Enter valid password';
+
+  @override
+  String get no_account => 'Don\'t Have Account ?';
+
+  @override
+  String get create_one => 'Create one';
+
+  @override
+  String get explore_now => 'Explore Now';
+
+  @override
+  String get avatar => 'Avatar';
+
+  @override
+  String get please_enter_name => 'Please Enter Name';
+
+  @override
+  String get please_enter_email => 'Please Enter Email';
+
+  @override
+  String get please_enter_phone_number => 'Please Enter Phone Number';
+
+  @override
+  String get please_enter_password => 'Please Enter Password';
+
+  @override
+  String get please_confirm_password => 'Please Confirm Password';
+
+  @override
+  String get pick_avatar => 'Pick Avatar';
+
+  @override
+  String get reset_password => 'Reset Password';
 }
