@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         CustomTextFormField(hintText: AppLocalizations.of(context)!.email,
                           prefixIcon: Image(image: AssetImage(AppAssets.emailIcon))
                           ,controller: emailController ,
-                          kerboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.emailAddress,
                           validator: (text){
                             if(text ==null || text.trim().isEmpty){
                               return AppLocalizations.of(context)!.enter_email;
@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(height: height*.02,),
                         CustomTextFormField(hintText:AppLocalizations.of(context)!.password,
                           controller: passwordController,
-                          kerboardType:TextInputType.visiblePassword ,
+                          keyboardType:TextInputType.visiblePassword ,
                           validator: (text){
                             if(text ==null || text.trim().isEmpty){
                               return AppLocalizations.of(context)!.enter_password;
@@ -87,11 +87,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         )
                         ,Row(mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            TextButton(onPressed: (){}, child:Text(AppLocalizations.of(context)!.forgetPasswordQuestion
+                            TextButton(onPressed: (){
+                              Navigator.pushNamedAndRemoveUntil(context, AppRoutes.forgetPasswordRouteName, (route) => true,);
+                            }, child:Text(AppLocalizations.of(context)!.forgetPasswordQuestion
                               ,style: AppStyles.regular16Orange.copyWith(
                                 fontSize: 14,
+                              ),
 
-                              ),))
+                            ))
                           ],),
                         SizedBox(height: height*.02,),
 
