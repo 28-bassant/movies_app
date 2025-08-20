@@ -25,9 +25,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   var formKey = GlobalKey<FormState>();
 
-  TextEditingController emailController =TextEditingController();
+  TextEditingController emailController =TextEditingController(text: 'route@gmail.com');
 
-  TextEditingController passwordController =TextEditingController();
+  TextEditingController passwordController =TextEditingController(text: 'Route123@');
 
   bool obscure=true;
 
@@ -233,6 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
               posActionName: "OK",
               posAction: () {
                 //todo:navigate to home
+                Navigator.pushNamedAndRemoveUntil(context, AppRoutes.homeScreendRouteName, (route) => true,);
               }
           );
         } else {
