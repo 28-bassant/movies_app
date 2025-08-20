@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:movies_app/UI/auth/login/login-screen.dart';
+import 'package:movies_app/UI/auth/on_boarding/on_boarding_screen.dart';
 import 'package:movies_app/UI/auth/update/update_screen.dart';
 import 'package:movies_app/providers/app-language-provider.dart';
 import 'package:movies_app/utils/app_routes.dart';
@@ -23,8 +24,9 @@ class MyApp extends StatelessWidget{
     var languageProvider = Provider.of<LanguageProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.loginRouteName,
+        initialRoute: AppRoutes.onBoardingRouteName,
         routes: {
+          AppRoutes.onBoardingRouteName: (context) => OnboardingScreen(),
           AppRoutes.loginRouteName: (context) => LoginScreen(),
           AppRoutes.registerRouteName: (context) =>RegisterScreen(),
           AppRoutes.updateRouteName: (context) =>UpdateScreen(),
