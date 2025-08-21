@@ -27,7 +27,10 @@ class AppAssets {
   static const String onBoarding5Screen = 'assets/images/onboarding5.png';
   static const String onBoarding6Screen = 'assets/images/onboarding6.png';
   static const String forgetPasswordImage = 'assets/images/forgetPassword.png';
-
+  static const String exit_icon = 'assets/images/exit_icon.png';
+  static const String wishList_icon = 'assets/images/wishlist_icon.png';
+  static const String history_icon = 'assets/images/history_icon.png';
+  static const String empty_image = 'assets/images/empty_image.png';
   static const String homeIcon = 'assets/images/home-icon.png';
   static const String searchIcon = 'assets/images/search-icon.png';
   static const String prowseIcon = 'assets/images/prowse-icon.png';
@@ -37,5 +40,4 @@ class AppAssets {
   static const String selectedProwseIcon = 'assets/images/selected-prowse-icon.png';
   static const String selectedProfileIcon = 'assets/images/selected-profile-icon.png';
   static const String emptyIcon = 'assets/images/empty-icon.png';
-
 }

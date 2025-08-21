@@ -15,7 +15,7 @@ class CustomElevatedButton extends StatelessWidget {
   num iconPadding;
   IconData? suffixIconName;
   double space;
-
+  bool isSuffixIcon;
   String? text2;
   bool isText2;
 
@@ -33,6 +33,9 @@ class CustomElevatedButton extends StatelessWidget {
     this.icon = false,
     this.iconName,
     this.mainAxisAlignment,
+    this.isSuffixIcon = false,
+
+
   });
 
   @override
@@ -74,15 +77,29 @@ class CustomElevatedButton extends StatelessWidget {
                           Text(text2 ?? '', style: AppStyles.regular20Black),
                         ],
                       )
-                      : Text(
+                      :
+                  Text(
                         text!,
                         style: textStyle ?? AppStyles.regular20Black,
                       ),
                   SizedBox(width: width * space),
-                  Icon(suffixIconName, color: AppColors.orangeColor),
+                  Icon(suffixIconName, color: AppColors.whiteColor,size: 25,),
+                ],
+              ):
+              isSuffixIcon ? Row(
+                mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
+                children: [
+                  Text(
+                    text!,
+                    style: textStyle ?? AppStyles.regular20Black,
+                  ),
+                  SizedBox(width: width * space),
+                  ImageIcon(AssetImage(iconName ?? '' , ),color: AppColors.whiteColor,
+                  size: 25,)
                 ],
               )
-              : Text(text!, style: textStyle ?? AppStyles.regular20Black),
+              : Text(text!,
+                  style: textStyle ?? AppStyles.regular20Black),
     );
   }
 }

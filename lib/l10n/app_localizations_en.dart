@@ -135,5 +135,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reset_password => 'Reset Password';
 
   @override
+  String get edit_profile => 'Edit Profile';
+
+  @override
+  String get exit => 'Exit';
+
+  @override
   String get search => 'Search';
 }

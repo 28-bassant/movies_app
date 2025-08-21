@@ -350,6 +350,18 @@ abstract class AppLocalizations {
   /// **'Reset Password'**
   String get reset_password;
 
+  /// No description provided for @edit_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get edit_profile;
+
+  /// No description provided for @exit.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get exit;
+
   /// No description provided for @search.
   ///
   /// In en, this message translates to:

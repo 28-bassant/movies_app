@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/UI/auth/forget_password/forget_password_screen.dart';
 import 'package:movies_app/UI/auth/login/login-screen.dart';
-import 'package:movies_app/UI/auth/on_boarding/on_boarding_screen.dart';
 import 'package:movies_app/UI/auth/update/update_screen.dart';
-
 import 'package:movies_app/providers/app-language-provider.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
 import 'UI/auth/register/register_screen.dart';
 import 'UI/home/home_screen/home_screen.dart';
+import 'UI/on_boarding/on_boarding_screen.dart';
 import 'l10n/app_localizations.dart';
 
 void main() {
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-        initialRoute: AppRoutes.homeScreendRouteName,
+        initialRoute: AppRoutes.onBoardingRouteName,
         routes: {
           AppRoutes.onBoardingRouteName: (context) => OnboardingScreen(),
           AppRoutes.loginRouteName: (context) => LoginScreen(),

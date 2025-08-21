@@ -45,5 +45,7 @@
     "please_confirm_password": "Please Confirm Password",
     "pick_avatar": "Pick Avatar",
     "reset_password": "Reset Password",
-    "search":"Search"
+    "edit_profile": "Edit Profile",
+     "exit": "Exit",
+     "search":"Search"
 }
