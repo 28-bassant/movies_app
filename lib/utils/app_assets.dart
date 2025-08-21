@@ -27,4 +27,15 @@ class AppAssets {
   static const String onBoarding5Screen = 'assets/images/onboarding5.png';
   static const String onBoarding6Screen = 'assets/images/onboarding6.png';
   static const String forgetPasswordImage = 'assets/images/forgetPassword.png';
+
+  static const String homeIcon = 'assets/images/home-icon.png';
+  static const String searchIcon = 'assets/images/search-icon.png';
+  static const String prowseIcon = 'assets/images/prowse-icon.png';
+  static const String profileIcon = 'assets/images/profile-icon.png';
+  static const String selectedHomeIcon = 'assets/images/selected-home-icon.png';
+  static const String selectedSearchIcon = 'assets/images/selected-search-icon.png';
+  static const String selectedProwseIcon = 'assets/images/selected-prowse-icon.png';
+  static const String selectedProfileIcon = 'assets/images/selected-profile-icon.png';
+
+
 }
