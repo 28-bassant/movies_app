@@ -133,4 +133,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get reset_password => 'إعادة تعيين كلمة المرور';
+
+  @override
+  String get search => 'بحث';
 }

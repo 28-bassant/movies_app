@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class ProwseTap extends StatelessWidget {
+  ProwseTap({super.key});
 
   @override
   Widget build(BuildContext context) {
