@@ -36,6 +36,6 @@ class AppAssets {
   static const String selectedSearchIcon = 'assets/images/selected-search-icon.png';
   static const String selectedProwseIcon = 'assets/images/selected-prowse-icon.png';
   static const String selectedProfileIcon = 'assets/images/selected-profile-icon.png';
-
+  static const String emptyIcon = 'assets/images/empty-icon.png';
 
 }
