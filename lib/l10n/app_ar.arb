@@ -41,6 +41,8 @@
    "please_enter_password": "الرجاء إدخال كلمة المرور",
    "please_confirm_password": "الرجاء تأكيد كلمة المرور",
    "pick_avatar": "اختر صورة رمزية",
-   "reset_password": "إعادة تعيين كلمة المرور"
+   "reset_password": "إعادة تعيين كلمة المرور",
+   "edit_profile": "تعديل الملف الشخصي",
+   "exit": "الخروج"
 
 }
