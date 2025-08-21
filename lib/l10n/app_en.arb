@@ -46,5 +46,6 @@
     "pick_avatar": "Pick Avatar",
     "reset_password": "Reset Password",
     "edit_profile": "Edit Profile",
-    "exit": "Exit"
+     "exit": "Exit",
+     "search":"Search"
 }

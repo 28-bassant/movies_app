@@ -139,4 +139,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get exit => 'الخروج';
+
+  @override
+  String get search => 'بحث';
 }
