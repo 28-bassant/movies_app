@@ -2,12 +2,13 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:movies_app/api/api-endpoints.dart';
 import 'package:movies_app/model/register_response.dart';
+import '../app-prefrences/token-storage.dart';
 import '../model/login-response.dart';
 import 'api-constant.dart';
 
 class ApiManager {
   static Future<LoginResponse> login(String email, String password) async {
-    final url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.login}");
+    Uri url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.login}");
     final response = await http.post(
       url,
       headers: {"Content-Type": "application/json"},
@@ -31,7 +32,7 @@ class ApiManager {
       String phone,
       int avaterId,
       ) async {
-    Uri url = Uri.https(ApiConstants.BaseUrl, ApiEndpoints.register);
+    Uri url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.register}");
 
     var data = {
       "email": email,
@@ -58,6 +59,29 @@ class ApiManager {
       }
     } catch (e) {
       throw Exception("Error while registering: $e");
+    }
+  }
+
+  static Future<void> deleteAccount() async {
+    final token = await TokenStorage.getToken();
+    Uri url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.deleteProfile}");
+
+    final response = await http.delete(
+      url,
+      headers: {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json",
+      },
+    );
+
+    print("DELETE ACCOUNT STATUS: ${response.statusCode}");
+    print("DELETE ACCOUNT BODY: ${response.body}");
+
+    if (response.statusCode == 200) {
+      final responseJson = jsonDecode(response.body);
+      print("Account Deleted: ${responseJson['message']}");
+    } else {
+      throw Exception("Failed to delete account: ${response.body}");
     }
   }
 

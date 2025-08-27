@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
@@ -8,7 +8,9 @@ import 'package:provider/provider.dart';
 
 import '../../../api/api-manager.dart';
 import '../../../app-prefrences/token-storage.dart';
+import '../../../app-prefrences/user_storage.dart';
 import '../../../providers/app-language-provider.dart';
+import '../../../providers/user_provider.dart';
 import '../../../utils/app_assets.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_styles.dart';
@@ -133,9 +135,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           )),
                           Text(AppLocalizations.of(context)!.or,style: AppStyles.regular16Orange,),
                           Expanded(child: Divider(thickness: 2,
-                            indent: width*.04,
-                            endIndent:  width*.06,
-                            color: AppColors.orangeColor))
+                              indent: width*.04,
+                              endIndent:  width*.06,
+                              color: AppColors.orangeColor))
                         ],),
                         SizedBox(height: height*.02,),
                         CustomElevatedButton(onPressed:(){
@@ -163,9 +165,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                       border: Border.all(
                                         color:
                                         languageProvider.appLanguage == 'en'
-                                        ?
+                                            ?
                                         AppColors.orangeColor
-                                        : Colors.transparent
+                                            : Colors.transparent
                                         ,width: 3,
                                       ),
                                     ),
@@ -184,9 +186,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                       border: Border.all(
                                         color:
                                         languageProvider.appLanguage == 'ar'
-                                        ?
+                                            ?
                                         AppColors.orangeColor
-                                        :Colors.transparent
+                                            :Colors.transparent
                                         , width: 3,
                                       ),
                                     ),
@@ -220,23 +222,72 @@ class _LoginScreenState extends State<LoginScreen> {
         //todo:hide loading
         DialogUtils.hideLoading(context: context);
 
+        // if (response.message == "Success Login") {
+        //     if (response.token != null) {
+        //       await TokenStorage.saveToken(response.token!);
+        //
+        //       // if (response.user != null) {
+        //       //   final userProvider = Provider.of<UserProvider>(context, listen: false);
+        //       //   userProvider.setUser(response.user!);
+        //       //   await UserStorage.saveUser(response.user!); // ← THIS LINE IS ESSENTIAL
+        //       // }
+        //
+        //       // In your login method, add these prints:
+        //       print('LOGIN RESPONSE: ${response.message}');
+        //       print('USER DATA: ${response.user?.toJson()}');
+        //       print('TOKEN: ${response.token}');
+        //
+        //       if (response.user != null) {
+        //         print('ABOUT TO SAVE USER...');
+        //         await UserStorage.saveUser(response.user!);
+        //         print('USER SAVED SUCCESSFULLY');
+        //       }
+        //     }
+        //     //todo:success
+        //   //todo:show msg
+        //   DialogUtils.showMsg(
+        //       context: context,
+        //       title: "Success",
+        //       msg: "Login Successful",
+        //       posActionName: "OK",
+        //       posAction: () {
+        //         //todo:navigate to home
+        //         Navigator.pushNamedAndRemoveUntil(
+        //           context,
+        //           AppRoutes.homeScreendRouteName,
+        //               (route) => false,
+        //         );
+        //       }
+        //   );
+        // }
         if (response.message == "Success Login") {
-            if (response.token != null) {
-              await TokenStorage.saveToken(response.token!);
+          if (response.token != null) {
+            await TokenStorage.saveToken(response.token!);
+
+            if (response.user != null) {
+              final userProvider = Provider.of<UserProvider>(context, listen: false);
+              userProvider.setUser(response.user!);
+              await UserStorage.saveUser(response.user!);
             }
-            //todo:success
-          //todo:show msg
+          }
+
           DialogUtils.showMsg(
-              context: context,
-              title: "Success",
-              msg: "Login Successful",
-              posActionName: "OK",
-              posAction: () {
-                //todo:navigate to home
-                Navigator.pushNamedAndRemoveUntil(context, AppRoutes.homeScreendRouteName, (route) => true,);
-              }
+            context: context,
+            title: "Success",
+            msg: "Login Successful",
+            posActionName: "OK",
+            posAction: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutes.homeScreendRouteName,
+                    (route) => false,
+              );
+            },
           );
-        } else {
+        }
+
+
+        else {
           //todo:server error
           //todo:show msg
           DialogUtils.showMsg(
@@ -248,15 +299,15 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       }
       //todo:client error
-        on SocketException {
-          DialogUtils.hideLoading(context: context);
-          DialogUtils.showMsg(
-            context: context,
-            title: "No Internet",
-            msg: "Please check your internet connection and try again.",
-            posActionName: "Retry",
-          );
-        } catch (e) {
+      on SocketException {
+        DialogUtils.hideLoading(context: context);
+        DialogUtils.showMsg(
+          context: context,
+          title: "No Internet",
+          msg: "Please check your internet connection and try again.",
+          posActionName: "Retry",
+        );
+      } catch (e) {
         //todo:hide loading
         DialogUtils.hideLoading(context: context);
         //todo:show msg
@@ -270,6 +321,10 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
   }
+
+
+
+
   Future loginWithGoogle(BuildContext context) async {
     try {
       final account = await googleSignIn.signIn();
