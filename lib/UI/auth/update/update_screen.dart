@@ -24,6 +24,8 @@ class UpdateScreen extends StatefulWidget {
 }
 
 class _UpdateScreenState extends State<UpdateScreen> {
+  var formKey = GlobalKey<FormState>();
+
   UserData? user;
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -100,17 +102,42 @@ class _UpdateScreenState extends State<UpdateScreen> {
                 ),
               ),
               SizedBox(height: height * .02),
-              CustomTextFormField(
-                controller: nameController,
-                prefixIcon:
-                Icon(Icons.person, color: AppColors.whiteColor),
-              ),
-              SizedBox(height: height * .02),
-              CustomTextFormField(
-                controller: phoneController,
-                prefixIcon:
-                Icon(Icons.phone, color: AppColors.whiteColor),
-              ),
+              Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      CustomTextFormField(
+                        controller: nameController,
+                        prefixIcon:
+                        Icon(Icons.person, color: AppColors.whiteColor),
+                        validator: (text) {
+                          if (text == null || text.trim().isEmpty) {
+                            return AppLocalizations.of(
+                              context,
+                            )!.please_enter_name;
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: height * .02),
+                      CustomTextFormField(
+                        controller: phoneController,
+                        prefixIcon:
+                        Icon(Icons.phone, color: AppColors.whiteColor),
+                        validator: (text) {
+                          if (text == null || text.trim().isEmpty) {
+                            return AppLocalizations.of(
+                              context,
+                            )!.please_enter_phone_number;
+                          }if(text.length > 12){
+                            return 'Please Enter a valid phone number';
+                          }
+                          return null;
+                        },
+                      ),
+                    ],
+                  )),
+
           
               SizedBox(height: height * .04),
               Container(
@@ -174,7 +201,9 @@ class _UpdateScreenState extends State<UpdateScreen> {
     }
   }
   void updateData() async {
-    if (user == null) return;
+    if (formKey.currentState?.validate() == true) {
+
+      if (user == null) return;
 
     var updatedUser = UserData(
       id: user!.id,
@@ -189,5 +218,5 @@ class _UpdateScreenState extends State<UpdateScreen> {
         updatedUser);
 
     Navigator.pop(context);
-  }
+  }}
 }
