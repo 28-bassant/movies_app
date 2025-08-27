@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/UI/home/taps/home-tap/home_tab.dart';
 import 'package:movies_app/UI/home/taps/prowse-tap/prowse-tap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider.dart';
 import '../../../utils/app_assets.dart';
 import '../../../utils/app_colors.dart';
-import '../taps/home-tap/home-tap.dart';
+
 import '../taps/profile-tap/profile-tap.dart';
 import '../taps/search-tap/search-tap.dart';
 
@@ -17,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Widget> taps = [HomeTap(), SearchTap(), ProwseTap(), ProfileTap()];
+  List<Widget> taps = [HomeTab(), SearchTap(), ProwseTap(), ProfileTap()];
   int selectedIndex = 0;
 
   @override
@@ -27,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
       final provider = Provider.of<UserProvider>(context, listen: false);
       await provider.loadUser();
       print('UserProvider - HOME ====> ${provider.hashCode}');
-      ///HASH = 693364899
     });
   }
 
