@@ -34,9 +34,13 @@ class _UpdateScreenState extends State<UpdateScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final provider = Provider
+          .of<UserProvider>(context, listen: false);
+      print('UserProvider - UPDATE ====> ${provider.hashCode}');
       var fetchedUser = Provider
           .of<UserProvider>(context, listen: false)
           .user;
+      print('====> $fetchedUser');
       if (fetchedUser == null) return;
       setState(() {
         user = fetchedUser;

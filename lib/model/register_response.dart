@@ -13,7 +13,7 @@ class RegisterResponse {
 }
 
 class UserData {
-  int? id;
+  String? id;
   String? name;
   String? email;
   String? phone;
@@ -24,24 +24,30 @@ class UserData {
     required this.name,
     required this.email,
     required this.phone,
-    required this.avaterId
+    required this.avaterId,
   });
 
   UserData.fromJson(dynamic json) {
-    id = json['id'];
+    id = json['_id'];
     name = json['name'];
     email = json['email'];
     phone = json['phone'];
-    avaterId = json['avaterId'];
+    avaterId = json['avatarId'];
   }
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['id'] = id;
+    map['_id'] = id;
     map['name'] = name;
     map['email'] = email;
     map['phone'] = phone;
-    map['avaterId'] = avaterId;
-
+    map['avatarId'] = avaterId;
     return map;
   }
+
+  @override
+  String toString() {
+    return 'UserData{id: $id, name: $name, email: $email, phone: $phone, avaterId: $avaterId}';
+  }
 }
+

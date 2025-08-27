@@ -15,23 +15,47 @@ class ApiManager {
       body: jsonEncode({"email": email, "password": password}),
     );
 
+    print('AUTH ===> ${response.body}');
+
     final responseData = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
+      await TokenStorage.saveToken(responseData['data']);
       return LoginResponse.fromJson(responseData);
     } else {
       throw Exception(responseData["message"] ?? "Login failed, try again.");
     }
   }
 
+  static Future<UserData> fetchProfile(String token) async {
+    Uri url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.profile}");
+    final response = await http.get(
+      url,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token",
+      },
+    );
+
+    print('PROFILE ===> ${response.body}');
+
+    final responseData = jsonDecode(response.body);
+
+    if (response.statusCode == 200) {
+      return UserData.fromJson(responseData['data']);
+    } else {
+      throw Exception(responseData["message"] ?? "Failed to load profile data.");
+    }
+  }
+
   static Future<RegisterResponse> register(
-      String email,
-      String name,
-      String password,
-      String confirmPassword,
-      String phone,
-      int avaterId,
-      ) async {
+    String email,
+    String name,
+    String password,
+    String confirmPassword,
+    String phone,
+    int avaterId,
+  ) async {
     Uri url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.register}");
 
     var data = {
@@ -64,7 +88,7 @@ class ApiManager {
 
   static Future<void> deleteAccount() async {
     final token = await TokenStorage.getToken();
-    Uri url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.deleteProfile}");
+    Uri url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.profile}");
 
     final response = await http.delete(
       url,
@@ -84,5 +108,4 @@ class ApiManager {
       throw Exception("Failed to delete account: ${response.body}");
     }
   }
-
 }

@@ -15,12 +15,13 @@ class UserProvider with ChangeNotifier {
 
   void setUser(UserData user) {
     _user = user;
+    UserStorage.saveUser(user);
     notifyListeners();
   }
 
   void clearUser() {
     _user = null;
-    notifyListeners();
+    UserStorage.clearUser();
   }
 
   Future<void> loadUser() async {
