@@ -142,4 +142,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get search => 'بحث';
+
+  @override
+  String get action => 'أكشن';
+
+  @override
+  String get adventure => 'مغامرة';
+
+  @override
+  String get comedy => 'كوميدي';
+
+  @override
+  String get drama => 'دراما';
+
+  @override
+  String get horror => 'رعب';
+
+  @override
+  String get fantasy => 'فانتازيا';
 }

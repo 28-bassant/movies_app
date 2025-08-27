@@ -35,6 +35,7 @@ class _ProfileTabState extends State<ProfileTap> {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
+    print('USER - Profile ====> ${user.toString()}');
 
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
@@ -107,26 +108,22 @@ class _ProfileTabState extends State<ProfileTap> {
                             context,
                             MaterialPageRoute(builder: (_) => UpdateScreen()),
                           );
-                          setState(() {
-
-                          });
-
+                          setState(() {});
                         },
-
                         text: AppLocalizations.of(context)!.edit_profile,
                       ),
                     ),
                     SizedBox(width: width * .02),
                     Expanded(
                       child: CustomElevatedButton(
-                        onPressed: () async{
-                          //todo: Navigate to Login
+                        onPressed: () async {
+                          Provider.of<UserProvider>(context, listen: false)
+                              .clearUser();
                           Navigator.pushNamedAndRemoveUntil(
                             context,
                             AppRoutes.loginRouteName,
-                                (route) => false,
+                            (route) => false,
                           );
-
                         },
                         text: AppLocalizations.of(context)!.exit,
                         backgroundColorButton: AppColors.redColor,
@@ -156,8 +153,7 @@ class _ProfileTabState extends State<ProfileTap> {
                           border: Border(
                             bottom: BorderSide(
                               width: isWishList == true ? 3 : 0,
-                              color:
-                              isWishList == true
+                              color: isWishList == true
                                   ? AppColors.orangeColor
                                   : AppColors.transparentColor,
                             ),
@@ -189,8 +185,7 @@ class _ProfileTabState extends State<ProfileTap> {
                           border: Border(
                             bottom: BorderSide(
                               width: isWishList == false ? 3 : 0,
-                              color:
-                              isWishList == false
+                              color: isWishList == false
                                   ? AppColors.orangeColor
                                   : AppColors.transparentColor,
                             ),
@@ -222,9 +217,5 @@ class _ProfileTabState extends State<ProfileTap> {
         ],
       ),
     );
-
   }
 }
-
-
-

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/UI/auth/forget_password/forget_password_screen.dart';
 import 'package:movies_app/UI/auth/login/login-screen.dart';
 import 'package:movies_app/UI/auth/update/update_screen.dart';
+import 'package:movies_app/UI/home/home_ui/browse_screen.dart';
 import 'package:movies_app/providers/app-language-provider.dart';
 import 'package:movies_app/providers/user_provider.dart';
 import 'package:movies_app/utils/app_routes.dart';
@@ -13,21 +14,18 @@ import 'UI/on_boarding/on_boarding_screen.dart';
 import 'app-prefrences/user_storage.dart';
 import 'l10n/app_localizations.dart';
 
-void main()  {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => UserProvider()
-        ),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => LanguageProvider()),
       ],
       child: MyApp(),
     ),
   );
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -37,18 +35,15 @@ class MyApp extends StatelessWidget {
     var languageProvider = Provider.of<LanguageProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-
-        initialRoute: AppRoutes.loginRouteName,
-        routes: {
-          AppRoutes.onBoardingRouteName: (context) => OnboardingScreen(),
-          AppRoutes.loginRouteName: (context) => LoginScreen(),
-          AppRoutes.registerRouteName: (context) =>RegisterScreen(),
-          AppRoutes.forgetPasswordRouteName: (context) => ForgetPasswordScreen(),
-          AppRoutes.updateRouteName: (context) =>UpdateScreen(),
-          AppRoutes.homeScreendRouteName: (context) =>HomeScreen(),
-        },
-
-
+      initialRoute: AppRoutes.loginRouteName,
+      routes: {
+        AppRoutes.onBoardingRouteName: (context) => OnboardingScreen(),
+        AppRoutes.loginRouteName: (context) => LoginScreen(),
+        AppRoutes.registerRouteName: (context) => RegisterScreen(),
+        AppRoutes.forgetPasswordRouteName: (context) => ForgetPasswordScreen(),
+        AppRoutes.updateRouteName: (context) => UpdateScreen(),
+        AppRoutes.homeScreendRouteName: (context) => HomeScreen(),
+      },
       locale: Locale(languageProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

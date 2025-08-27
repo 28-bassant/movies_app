@@ -19,7 +19,6 @@ class AppAssets {
   static const String updateAvatar7 = 'assets/images/update_avatar7.png';
   static const String updateAvatar8 = 'assets/images/update_avatar8.png';
   static const String updateAvatar9 = 'assets/images/update_avatar9.png';
-
   static const String onBoarding1Screen = 'assets/images/onboarding1.png';
   static const String onBoarding2Screen = 'assets/images/onboarding2.png';
   static const String onBoarding3Screen = 'assets/images/onboarding3.png';
@@ -40,4 +39,6 @@ class AppAssets {
   static const String selectedProwseIcon = 'assets/images/selected-prowse-icon.png';
   static const String selectedProfileIcon = 'assets/images/selected-profile-icon.png';
   static const String emptyIcon = 'assets/images/empty-icon.png';
+  static const String movieImage = 'assets/images/movie_image.png';
+  static const String rateIcon = 'assets/images/star.png';
 }
