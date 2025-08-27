@@ -142,6 +142,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get search => 'Search';
+
   @override
   String get action => 'Action';
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/api/api-constant.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_routes.dart';
 
@@ -22,17 +23,6 @@ class _AvatarBottomSheetState extends State<AvatarBottomSheet> {
   }
   @override
   Widget build(BuildContext context) {
-    List<String> avatarImagesList = [
-      AppAssets.updateAvatar1,
-      AppAssets.updateAvatar2,
-      AppAssets.updateAvatar3,
-      AppAssets.updateAvatar4,
-      AppAssets.updateAvatar5,
-      AppAssets.updateAvatar6,
-      AppAssets.updateAvatar7,
-      AppAssets.updateAvatar8,
-      AppAssets.updateAvatar9,
-    ];
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Container(
@@ -48,7 +38,7 @@ class _AvatarBottomSheetState extends State<AvatarBottomSheet> {
           crossAxisSpacing: width * .02,
           mainAxisSpacing: height * .01
         ),
-        itemCount: avatarImagesList.length,
+        itemCount: ApiConstants.avatarImagesList.length,
 
         itemBuilder: (context, index) {
           return InkWell(
@@ -57,7 +47,7 @@ class _AvatarBottomSheetState extends State<AvatarBottomSheet> {
                 currentIndex = index;
               });
               Navigator.pop(context, {
-                "image": avatarImagesList[index],
+                "image": ApiConstants.avatarImagesList[index],
                 "index": index,
               });
             },
@@ -69,7 +59,7 @@ class _AvatarBottomSheetState extends State<AvatarBottomSheet> {
                   ),
                   borderRadius: BorderRadius.circular(20)
               ),
-              child: Image(image: AssetImage(avatarImagesList[index])),
+              child: Image(image: AssetImage(ApiConstants.avatarImagesList[index])),
             ),
           );
         },

@@ -367,6 +367,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search'**
   String get search;
+
   /// No description provided for @action.
   ///
   /// In en, this message translates to:

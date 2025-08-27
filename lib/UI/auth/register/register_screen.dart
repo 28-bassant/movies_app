@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_app/api/api-constant.dart';
 import 'package:movies_app/api/api-manager.dart';
 import 'package:movies_app/app-prefrences/user_storage.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
@@ -10,6 +11,7 @@ import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/dialog-utils.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/app-language-provider.dart';
+import '../../../providers/user_provider.dart';
 import '../widgets/custom-elevated-button.dart';
 import '../widgets/custom-text-form-field.dart';
 
@@ -20,17 +22,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  List<String> avatarImagesList = [
-    AppAssets.updateAvatar1,
-    AppAssets.updateAvatar2,
-    AppAssets.updateAvatar3,
-    AppAssets.updateAvatar4,
-    AppAssets.updateAvatar5,
-    AppAssets.updateAvatar6,
-    AppAssets.updateAvatar7,
-    AppAssets.updateAvatar8,
-    AppAssets.updateAvatar9,
-  ];
+
   var formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController(
     text: "route@gmail.com",
@@ -72,23 +64,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Container(
                 child: CarouselSlider(
                   options: CarouselOptions(height: height * .2,
-                      enlargeCenterPage: true,
+                    enlargeCenterPage: true,
                     viewportFraction: 0.33,
                   ),
-                  items: avatarImagesList.asMap().entries.map((entry) {
+                  items: ApiConstants.avatarImagesList.asMap().entries.map((entry) {
                     int index = entry.key;
                     String path = entry.value;
 
                     return GestureDetector(
                       onTap: () {
                         setState(() {
-                          avaterId = index + 1;
+                          avaterId = index ;
                         });
                       },
                       child: Container(
                         width: width * .4,
-                        child: Image.asset(avatarImagesList[index],
-                       fit: BoxFit.fill,
+                        child: Image.asset(ApiConstants.avatarImagesList[index],
+                          fit: BoxFit.fill,
                         ),
                       ),
                     );
@@ -231,6 +223,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       onPressed: () {
                         //todo : Navigate to Home Screen
                         register();
+
                       },
                       text: AppLocalizations.of(context)!.createAccount,
                     ),
@@ -277,9 +270,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   shape: BoxShape.circle,
                                   border: Border.all(
                                     color:
-                                        languageProvider.appLanguage == 'en'
-                                            ? AppColors.orangeColor
-                                            : Colors.transparent,
+                                    languageProvider.appLanguage == 'en'
+                                        ? AppColors.orangeColor
+                                        : Colors.transparent,
                                     width: 3,
                                   ),
                                 ),
@@ -301,9 +294,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   shape: BoxShape.circle,
                                   border: Border.all(
                                     color:
-                                        languageProvider.appLanguage == 'ar'
-                                            ? AppColors.orangeColor
-                                            : Colors.transparent,
+                                    languageProvider.appLanguage == 'ar'
+                                        ? AppColors.orangeColor
+                                        : Colors.transparent,
                                     width: 3,
                                   ),
                                 ),
@@ -347,7 +340,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
         if (response.message == 'User created successfully') {
           if (response.data != null) {
-            await UserStorage.saveUser(response.data!.toJson());
+            await UserStorage.saveUser(response.data!);
+            Provider.of<UserProvider>(context, listen: false).setUser(response.data!);
+
           }
           //todo:show msg
           DialogUtils.showMsg(
@@ -379,6 +374,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           posActionName: 'ok',
         );
       }
+
     }
   }
 }
