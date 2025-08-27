@@ -1,3 +1,5 @@
+import 'package:movies_app/model/register_response.dart';
+
 class LoginResponse {
   final String message;
   final String? token;
@@ -6,8 +8,8 @@ class LoginResponse {
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return LoginResponse(
-      message: json["message"],
-      token: json["data"],
+      message: json['message'],
+      token: json['data'],
     );
   }
 }

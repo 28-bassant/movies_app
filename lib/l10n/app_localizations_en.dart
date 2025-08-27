@@ -133,4 +133,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reset_password => 'Reset Password';
+
+  @override
+  String get edit_profile => 'Edit Profile';
+
+  @override
+  String get exit => 'Exit';
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get action => 'Action';
+
+  @override
+  String get adventure => 'Adventure';
+
+  @override
+  String get comedy => 'Comedy';
+
+  @override
+  String get drama => 'Drama';
+
+  @override
+  String get horror => 'Horror';
+
+  @override
+  String get fantasy => 'Fantasy';
 }

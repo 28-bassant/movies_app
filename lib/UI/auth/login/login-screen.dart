@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
@@ -8,13 +8,16 @@ import 'package:provider/provider.dart';
 
 import '../../../api/api-manager.dart';
 import '../../../app-prefrences/token-storage.dart';
+import '../../../app-prefrences/user_storage.dart';
 import '../../../providers/app-language-provider.dart';
+import '../../../providers/user_provider.dart';
 import '../../../utils/app_assets.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_styles.dart';
 import '../../../utils/dialog-utils.dart';
 import '../widgets/custom-elevated-button.dart';
 import '../widgets/custom-text-form-field.dart';
+
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
 
@@ -25,11 +28,13 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   var formKey = GlobalKey<FormState>();
 
-  TextEditingController emailController =TextEditingController(text: 'route@gmail.com');
+  TextEditingController emailController =
+      TextEditingController(text: 'route@gmail.com');
 
-  TextEditingController passwordController =TextEditingController(text: 'Route123@');
+  TextEditingController passwordController =
+      TextEditingController(text: 'Route123@');
 
-  bool obscure=true;
+  bool obscure = true;
 
   final GoogleSignIn googleSignIn = GoogleSignIn(
     scopes: ['email'],
@@ -37,121 +42,179 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var width =   MediaQuery.of(context).size.width;
-    var height =   MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     var languageProvider = Provider.of<LanguageProvider>(context);
 
     return Scaffold(
-      backgroundColor:Colors.black,
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: width*.04),
+          padding: EdgeInsets.symmetric(horizontal: width * .04),
           child: SingleChildScrollView(
-            child: Column(crossAxisAlignment: CrossAxisAlignment.stretch,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Image(image: AssetImage(AppAssets.logoIcon),height: height*.20,),
-                SizedBox(height: height*.02,),
-                Form( key:formKey,
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.stretch,
+                Image(
+                  image: AssetImage(AppAssets.logoIcon),
+                  height: height * .20,
+                ),
+                SizedBox(
+                  height: height * .02,
+                ),
+                Form(
+                    key: formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        CustomTextFormField(hintText: AppLocalizations.of(context)!.email,
-                          prefixIcon: Image(image: AssetImage(AppAssets.emailIcon))
-                          ,controller: emailController ,
+                        CustomTextFormField(
+                          hintText: AppLocalizations.of(context)!.email,
+                          prefixIcon:
+                              Image(image: AssetImage(AppAssets.emailIcon)),
+                          controller: emailController,
                           keyboardType: TextInputType.emailAddress,
-                          validator: (text){
-                            if(text ==null || text.trim().isEmpty){
+                          validator: (text) {
+                            if (text == null || text.trim().isEmpty) {
                               return AppLocalizations.of(context)!.enter_email;
                             }
-                            final bool emailValid =
-                            RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            final bool emailValid = RegExp(
+                                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                 .hasMatch(emailController.text);
-                            if(!emailValid){
+                            if (!emailValid) {
                               return AppLocalizations.of(context)!.valid_email;
                             }
                             return null;
-                          },),
-
-                        SizedBox(height: height*.02,),
-                        CustomTextFormField(hintText:AppLocalizations.of(context)!.password,
+                          },
+                        ),
+                        SizedBox(
+                          height: height * .02,
+                        ),
+                        CustomTextFormField(
+                          hintText: AppLocalizations.of(context)!.password,
                           controller: passwordController,
-                          validator: (text){
-                            if(text ==null || text.trim().isEmpty){
-                              return AppLocalizations.of(context)!.enter_password;
+                          validator: (text) {
+                            if (text == null || text.trim().isEmpty) {
+                              return AppLocalizations.of(context)!
+                                  .enter_password;
                             }
-                            if(text.length<8){
-                              return AppLocalizations.of(context)!.valid_password;
+                            if (text.length < 8) {
+                              return AppLocalizations.of(context)!
+                                  .valid_password;
                             }
                             return null;
                           },
-
-                          prefixIcon: Image(image: AssetImage(AppAssets.passIcon)),
-                          suffixIcon: IconButton(onPressed: (){
-                            obscure =!obscure;
-                            setState(() {
-
-                            });
-                          }
-                              , icon:Icon(obscure? Icons.visibility_off:Icons.visibility,color:AppColors.whiteColor,) ),
-                          obscureText:obscure,obscuringCharacter:"*" ,
-                        )
-                        ,Row(mainAxisAlignment: MainAxisAlignment.end,
+                          prefixIcon:
+                              Image(image: AssetImage(AppAssets.passIcon)),
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                obscure = !obscure;
+                                setState(() {});
+                              },
+                              icon: Icon(
+                                obscure
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: AppColors.whiteColor,
+                              )),
+                          obscureText: obscure,
+                          obscuringCharacter: "*",
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            TextButton(onPressed: (){
-                              Navigator.pushNamedAndRemoveUntil(context, AppRoutes.forgetPasswordRouteName, (route) => true,);
-                            }, child:Text(AppLocalizations.of(context)!.forgetPasswordQuestion
-                              ,style: AppStyles.regular16Orange.copyWith(
-                                fontSize: 14,
-                              ),
-
-                            ))
-                          ],),
-                        SizedBox(height: height*.02,),
-
-                        CustomElevatedButton(onPressed:(){
-                          login();
-                        },
-                            text:AppLocalizations.of(context)!.login)
-                        , SizedBox(height: height*.02,),
-                        Row(mainAxisAlignment: MainAxisAlignment.center,
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    AppRoutes.forgetPasswordRouteName,
+                                    (route) => true,
+                                  );
+                                },
+                                child: Text(
+                                  AppLocalizations.of(context)!
+                                      .forgetPasswordQuestion,
+                                  style: AppStyles.regular16Orange.copyWith(
+                                    fontSize: 14,
+                                  ),
+                                ))
+                          ],
+                        ),
+                        SizedBox(
+                          height: height * .02,
+                        ),
+                        CustomElevatedButton(
+                            onPressed: () {
+                              login();
+                            },
+                            text: AppLocalizations.of(context)!.login),
+                        SizedBox(
+                          height: height * .02,
+                        ),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(AppLocalizations.of(context)!.no_account,
-                                  style:AppStyles.regular14White)
-                              ,TextButton(onPressed: (){
-                                //todo : Navigate to Register Screen
-                                Navigator.pushNamedAndRemoveUntil(context, AppRoutes.registerRouteName, (route) => true,);
-
-                              },
-                                  child: Text(AppLocalizations.of(context)!.create_one,style:AppStyles.black14Orange))
-                            ])
-                        , SizedBox(height: height*.01,)
-                        ,Row(children: [
-                          Expanded(child: Divider(
-                            indent: width*.05,
-                            endIndent:  width*.04,
-                            thickness: 2,
-                            color: AppColors.orangeColor,
-                          )),
-                          Text(AppLocalizations.of(context)!.or,style: AppStyles.regular16Orange,),
-                          Expanded(child: Divider(thickness: 2,
-                            indent: width*.04,
-                            endIndent:  width*.06,
-                            color: AppColors.orangeColor))
-                        ],),
-                        SizedBox(height: height*.02,),
-                        CustomElevatedButton(onPressed:(){
-                          loginWithGoogle(context);
-                        },
-                            text:AppLocalizations.of(context)!.loginWithGoogle,
-                            textStyle: AppStyles.regular16Black,icon: true,iconName: AppAssets.googleIcon)
-
-                        ,SizedBox(height: height*.04,)
-                        , Align(alignment: Alignment.center,
+                                  style: AppStyles.regular14White),
+                              TextButton(
+                                  onPressed: () {
+                                    //todo : Navigate to Register Screen
+                                    Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      AppRoutes.registerRouteName,
+                                      (route) => true,
+                                    );
+                                  },
+                                  child: Text(
+                                      AppLocalizations.of(context)!.create_one,
+                                      style: AppStyles.black14Orange))
+                            ]),
+                        SizedBox(
+                          height: height * .01,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                                child: Divider(
+                              indent: width * .05,
+                              endIndent: width * .04,
+                              thickness: 2,
+                              color: AppColors.orangeColor,
+                            )),
+                            Text(
+                              AppLocalizations.of(context)!.or,
+                              style: AppStyles.regular16Orange,
+                            ),
+                            Expanded(
+                                child: Divider(
+                                    thickness: 2,
+                                    indent: width * .04,
+                                    endIndent: width * .06,
+                                    color: AppColors.orangeColor))
+                          ],
+                        ),
+                        SizedBox(
+                          height: height * .02,
+                        ),
+                        CustomElevatedButton(
+                            onPressed: () {
+                              loginWithGoogle(context);
+                            },
+                            text: AppLocalizations.of(context)!.loginWithGoogle,
+                            textStyle: AppStyles.regular16Black,
+                            icon: true,
+                            iconName: AppAssets.googleIcon),
+                        SizedBox(
+                          height: height * .04,
+                        ),
+                        Align(
+                          alignment: Alignment.center,
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(40),
-                                border: Border.all(width: 1.5,color: AppColors.orangeColor)
-                            ),
-                            child: Row(mainAxisSize: MainAxisSize.min,
+                                border: Border.all(
+                                    width: 1.5, color: AppColors.orangeColor)),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 GestureDetector(
                                   onTap: () {
@@ -162,18 +225,23 @@ class _LoginScreenState extends State<LoginScreen> {
                                       shape: BoxShape.circle,
                                       border: Border.all(
                                         color:
-                                        languageProvider.appLanguage == 'en'
-                                        ?
-                                        AppColors.orangeColor
-                                        : Colors.transparent
-                                        ,width: 3,
+                                            languageProvider.appLanguage == 'en'
+                                                ? AppColors.orangeColor
+                                                : Colors.transparent,
+                                        width: 3,
                                       ),
                                     ),
                                     child: ClipOval(
-                                      child: Image(image: AssetImage(AppAssets.usFlag),fit: BoxFit.cover,),
+                                      child: Image(
+                                        image: AssetImage(AppAssets.usFlag),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
-                                ),SizedBox(width: width*.03,),
+                                ),
+                                SizedBox(
+                                  width: width * .03,
+                                ),
                                 GestureDetector(
                                   onTap: () {
                                     languageProvider.changeLanguage('ar');
@@ -183,22 +251,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                       shape: BoxShape.circle,
                                       border: Border.all(
                                         color:
-                                        languageProvider.appLanguage == 'ar'
-                                        ?
-                                        AppColors.orangeColor
-                                        :Colors.transparent
-                                        , width: 3,
+                                            languageProvider.appLanguage == 'ar'
+                                                ? AppColors.orangeColor
+                                                : Colors.transparent,
+                                        width: 3,
                                       ),
                                     ),
                                     child: ClipOval(
-                                      child: Image(image: AssetImage(AppAssets.egyptFlag),fit: BoxFit.cover,),
+                                      child: Image(
+                                        image: AssetImage(AppAssets.egyptFlag),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
-
-                              ],),),
+                              ],
+                            ),
+                          ),
                         )
-                      ],)),
+                      ],
+                    )),
               ],
             ),
           ),
@@ -206,6 +278,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
   void login() async {
     if (formKey.currentState?.validate() == true) {
       final email = emailController.text.trim();
@@ -220,21 +293,64 @@ class _LoginScreenState extends State<LoginScreen> {
         //todo:hide loading
         DialogUtils.hideLoading(context: context);
 
+        // if (response.message == "Success Login") {
+        //     if (response.token != null) {
+        //       await TokenStorage.saveToken(response.token!);
+        //
+        //       // if (response.user != null) {
+        //       //   final userProvider = Provider.of<UserProvider>(context, listen: false);
+        //   userProvider.setUser(response.user!);
+        //   await UserStorage.saveUser(response.user!); // ← THIS LINE IS ESSENTIAL
+        //       // }
+        //
+        //       // In your login method, add these prints:
+        //       print('LOGIN RESPONSE: ${response.message}');
+        //       print('USER DATA: ${response.user?.toJson()}');
+        //       print('TOKEN: ${response.token}');
+        //
+        //       if (response.user != null) {
+        //         print('ABOUT TO SAVE USER...');
+        //         await UserStorage.saveUser(response.user!);
+        //         print('USER SAVED SUCCESSFULLY');
+        //       }
+        //     }
+        //     //todo:success
+        //   //todo:show msg
+        //   DialogUtils.showMsg(
+        //       context: context,
+        //       title: "Success",
+        //       msg: "Login Successful",
+        //       posActionName: "OK",
+        //       posAction: () {
+        //         //todo:navigate to home
+        //         Navigator.pushNamedAndRemoveUntil(
+        //           context,
+        //           AppRoutes.homeScreendRouteName,
+        //               (route) => false,
+        //         );
+        //       }
+        //   );
+        // }
         if (response.message == "Success Login") {
-            if (response.token != null) {
-              await TokenStorage.saveToken(response.token!);
-            }
-            //todo:success
-          //todo:show msg
+          final token = response.token;
+          if (token == null) return;
+          final user = await ApiManager.fetchProfile(token);
+          final userProvider =
+              Provider.of<UserProvider>(context, listen: false);
+          userProvider.setUser(user);
+
           DialogUtils.showMsg(
-              context: context,
-              title: "Success",
-              msg: "Login Successful",
-              posActionName: "OK",
-              posAction: () {
-                //todo:navigate to home
-                Navigator.pushNamedAndRemoveUntil(context, AppRoutes.homeScreendRouteName, (route) => true,);
-              }
+            context: context,
+            title: "Success",
+            msg: "Login Successful",
+            posActionName: "OK",
+            posAction: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutes.homeScreendRouteName,
+                (route) => false,
+              );
+            },
           );
         } else {
           //todo:server error
@@ -248,15 +364,15 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       }
       //todo:client error
-        on SocketException {
-          DialogUtils.hideLoading(context: context);
-          DialogUtils.showMsg(
-            context: context,
-            title: "No Internet",
-            msg: "Please check your internet connection and try again.",
-            posActionName: "Retry",
-          );
-        } catch (e) {
+      on SocketException {
+        DialogUtils.hideLoading(context: context);
+        DialogUtils.showMsg(
+          context: context,
+          title: "No Internet",
+          msg: "Please check your internet connection and try again.",
+          posActionName: "Retry",
+        );
+      } catch (e) {
         //todo:hide loading
         DialogUtils.hideLoading(context: context);
         //todo:show msg
@@ -268,8 +384,8 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       }
     }
-
   }
+
   Future loginWithGoogle(BuildContext context) async {
     try {
       final account = await googleSignIn.signIn();
@@ -281,7 +397,6 @@ class _LoginScreenState extends State<LoginScreen> {
           posActionName: "OK",
           posAction: () {
             // TODO: Navigate to home
-
           },
         );
         debugPrint("User Email: ${account.email}");
