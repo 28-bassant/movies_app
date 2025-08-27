@@ -8,6 +8,8 @@ import 'package:movies_app/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
 import 'UI/auth/register/register_screen.dart';
+import 'UI/home/home_screen/home_screen.dart';
+import 'UI/on_boarding/on_boarding_screen.dart';
 import 'l10n/app_localizations.dart';
 
 void main() {
@@ -27,14 +29,16 @@ class MyApp extends StatelessWidget {
     var languageProvider = Provider.of<LanguageProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.browseScreenRouteName,
+
+      initialRoute: AppRoutes.onBoardingRouteName,
       routes: {
+        AppRoutes.onBoardingRouteName: (context) => OnboardingScreen(),
         AppRoutes.loginRouteName: (context) => LoginScreen(),
         AppRoutes.registerRouteName: (context) => RegisterScreen(),
         AppRoutes.forgetPasswordRouteName: (context) => ForgetPasswordScreen(),
         AppRoutes.updateRouteName: (context) => UpdateScreen(),
+        AppRoutes.homeScreendRouteName: (context) => HomeScreen(),
         AppRoutes.browseScreenRouteName: (context) => BrowseScreen(),
-
       },
 
       locale: Locale(languageProvider.appLanguage),

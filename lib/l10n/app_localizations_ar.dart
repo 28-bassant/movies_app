@@ -135,6 +135,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get reset_password => 'إعادة تعيين كلمة المرور';
 
   @override
+  String get edit_profile => 'تعديل الملف الشخصي';
+
+  @override
+  String get exit => 'الخروج';
+
+  @override
+  String get search => 'بحث';
   String get action => 'أكشن';
 
   @override

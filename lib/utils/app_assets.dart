@@ -19,8 +19,26 @@ class AppAssets {
   static const String updateAvatar7 = 'assets/images/update_avatar7.png';
   static const String updateAvatar8 = 'assets/images/update_avatar8.png';
   static const String updateAvatar9 = 'assets/images/update_avatar9.png';
+  static const String onBoarding1Screen = 'assets/images/onboarding1.png';
+  static const String onBoarding2Screen = 'assets/images/onboarding2.png';
+  static const String onBoarding3Screen = 'assets/images/onboarding3.png';
+  static const String onBoarding4Screen = 'assets/images/onboarding4.png';
+  static const String onBoarding5Screen = 'assets/images/onboarding5.png';
+  static const String onBoarding6Screen = 'assets/images/onboarding6.png';
   static const String forgetPasswordImage = 'assets/images/forgetPassword.png';
+  static const String exit_icon = 'assets/images/exit_icon.png';
+  static const String wishList_icon = 'assets/images/wishlist_icon.png';
+  static const String history_icon = 'assets/images/history_icon.png';
+  static const String empty_image = 'assets/images/empty_image.png';
+  static const String homeIcon = 'assets/images/home-icon.png';
+  static const String searchIcon = 'assets/images/search-icon.png';
+  static const String prowseIcon = 'assets/images/prowse-icon.png';
+  static const String profileIcon = 'assets/images/profile-icon.png';
+  static const String selectedHomeIcon = 'assets/images/selected-home-icon.png';
+  static const String selectedSearchIcon = 'assets/images/selected-search-icon.png';
+  static const String selectedProwseIcon = 'assets/images/selected-prowse-icon.png';
+  static const String selectedProfileIcon = 'assets/images/selected-profile-icon.png';
+  static const String emptyIcon = 'assets/images/empty-icon.png';
   static const String movieImage = 'assets/images/movie_image.png';
   static const String rateIcon = 'assets/images/star.png';
-
 }

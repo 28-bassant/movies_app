@@ -1,10 +1,14 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_app/api/api-manager.dart';
+import 'package:movies_app/app-prefrences/user_storage.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
+import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_styles.dart';
+import 'package:movies_app/utils/dialog-utils.dart';
 import 'package:provider/provider.dart';
-
 import '../../../providers/app-language-provider.dart';
 import '../widgets/custom-elevated-button.dart';
 import '../widgets/custom-text-form-field.dart';
@@ -16,11 +20,32 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  List<String> avatarImagesList = [
+    AppAssets.updateAvatar1,
+    AppAssets.updateAvatar2,
+    AppAssets.updateAvatar3,
+    AppAssets.updateAvatar4,
+    AppAssets.updateAvatar5,
+    AppAssets.updateAvatar6,
+    AppAssets.updateAvatar7,
+    AppAssets.updateAvatar8,
+    AppAssets.updateAvatar9,
+  ];
   var formKey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
-
+  TextEditingController emailController = TextEditingController(
+    text: "route@gmail.com",
+  );
+  TextEditingController passwordController = TextEditingController(
+    text: 'Route123@',
+  );
+  TextEditingController confirmPasswordController = TextEditingController(
+    text: 'Route123@',
+  );
+  TextEditingController phoneController = TextEditingController(
+    text: '+201141209334',
+  );
+  TextEditingController nameController = TextEditingController(text: 'Route');
+  int avaterId = 0;
   bool obscure = true;
 
   @override
@@ -44,14 +69,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Image(image: AssetImage(AppAssets.avatar1Icon)),
-                  Image(image: AssetImage(AppAssets.avatar2Icon)),
-                  Image(image: AssetImage(AppAssets.avatar3Icon)),
-                ],
+              Container(
+                child: CarouselSlider(
+                  options: CarouselOptions(height: height * .2,
+                      enlargeCenterPage: true,
+                    viewportFraction: 0.33,
+                  ),
+                  items: avatarImagesList.asMap().entries.map((entry) {
+                    int index = entry.key;
+                    String path = entry.value;
+
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          avaterId = index + 1;
+                        });
+                      },
+                      child: Container(
+                        width: width * .4,
+                        child: Image.asset(avatarImagesList[index],
+                       fit: BoxFit.fill,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
               ),
+
               SizedBox(height: height * .02),
               Text(
                 AppLocalizations.of(context)!.avatar,
@@ -73,7 +117,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       controller: nameController,
                       validator: (text) {
                         if (text == null || text.trim().isEmpty) {
-                          return AppLocalizations.of(context)!.please_enter_name;
+                          return AppLocalizations.of(
+                            context,
+                          )!.please_enter_name;
                         }
                         return null;
                       },
@@ -86,7 +132,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       keyboardType: TextInputType.emailAddress,
                       validator: (text) {
                         if (text == null || text.trim().isEmpty) {
-                          return AppLocalizations.of(context)!.please_enter_email;
+                          return AppLocalizations.of(
+                            context,
+                          )!.please_enter_email;
                         }
                         final bool emailValid = RegExp(
                           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
@@ -97,7 +145,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         return null;
                       },
                     ),
-          
+
                     SizedBox(height: height * .02),
                     CustomTextFormField(
                       hintText: AppLocalizations.of(context)!.password,
@@ -105,14 +153,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       keyboardType: TextInputType.visiblePassword,
                       validator: (text) {
                         if (text == null || text.trim().isEmpty) {
-                          return AppLocalizations.of(context)!.please_enter_password;
+                          return AppLocalizations.of(
+                            context,
+                          )!.please_enter_password;
                         }
                         if (text.length < 6) {
                           return AppLocalizations.of(context)!.valid_password;
                         }
                         return null;
                       },
-          
+
                       prefixIcon: Image(image: AssetImage(AppAssets.passIcon)),
                       suffixIcon: IconButton(
                         onPressed: () {
@@ -130,18 +180,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     SizedBox(height: height * .02),
                     CustomTextFormField(
                       hintText: AppLocalizations.of(context)!.confirmPassword,
-                      controller: passwordController,
+                      controller: confirmPasswordController,
                       keyboardType: TextInputType.visiblePassword,
                       validator: (text) {
                         if (text == null || text.trim().isEmpty) {
-                          return AppLocalizations.of(context)!.please_confirm_password;
+                          return AppLocalizations.of(
+                            context,
+                          )!.please_confirm_password;
                         }
                         if (text.length < 6) {
                           return AppLocalizations.of(context)!.valid_password;
                         }
                         return null;
                       },
-          
+
                       prefixIcon: Image(image: AssetImage(AppAssets.passIcon)),
                       suffixIcon: IconButton(
                         onPressed: () {
@@ -164,7 +216,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         color: AppColors.whiteColor,
                       ),
                       keyboardType: TextInputType.number,
-                      controller: nameController,
+                      controller: phoneController,
                       validator: (text) {
                         if (text == null || text.trim().isEmpty) {
                           return AppLocalizations.of(
@@ -276,9 +328,57 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
-  void register()  {
-    if (formKey.currentState!.validate() == true) {
-      
+
+  void register() async {
+    if (formKey.currentState?.validate() == true) {
+      try {
+        //todo : Show Loading
+        DialogUtils.showLopading(textLoading: "Loading...", context: context);
+        var response = await ApiManager.register(
+          emailController.text,
+          nameController.text,
+          passwordController.text,
+          confirmPasswordController.text,
+          phoneController.text,
+          avaterId,
+        );
+        //todo : hide Loading
+        DialogUtils.hideLoading(context: context);
+
+        if (response.message == 'User created successfully') {
+          if (response.data != null) {
+            await UserStorage.saveUser(response.data!.toJson());
+          }
+          //todo:show msg
+          DialogUtils.showMsg(
+            context: context,
+            title: "Success",
+            msg: "Registered Successfully",
+            posActionName: "OK",
+            posAction: () {
+              //todo:navigate to home
+              Navigator.pushNamedAndRemoveUntil(context, AppRoutes.homeScreendRouteName, (route) => true,);
+            },
+          );
+        } else {
+          //todo : error from server
+          //todo : show meg
+          DialogUtils.showMsg(
+            context: context,
+            msg: response.message ?? '',
+            posActionName: 'ok',
+          );
+        }
+      } catch (e) {
+        //todo : hide Loading
+        DialogUtils.hideLoading(context: context);
+        //todo : error from client
+        DialogUtils.showMsg(
+          context: context,
+          msg: e.toString(),
+          posActionName: 'ok',
+        );
+      }
     }
   }
 }
