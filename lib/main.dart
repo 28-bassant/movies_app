@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/UI/auth/forget_password/forget_password_screen.dart';
 import 'package:movies_app/UI/auth/login/login-screen.dart';
 import 'package:movies_app/UI/auth/update/update_screen.dart';
+import 'package:movies_app/UI/home/home_ui/browse_screen.dart';
 import 'package:movies_app/providers/app-language-provider.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:provider/provider.dart';
@@ -26,12 +27,14 @@ class MyApp extends StatelessWidget {
     var languageProvider = Provider.of<LanguageProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.loginRouteName,
+      initialRoute: AppRoutes.browseScreenRouteName,
       routes: {
         AppRoutes.loginRouteName: (context) => LoginScreen(),
         AppRoutes.registerRouteName: (context) => RegisterScreen(),
         AppRoutes.forgetPasswordRouteName: (context) => ForgetPasswordScreen(),
         AppRoutes.updateRouteName: (context) => UpdateScreen(),
+        AppRoutes.browseScreenRouteName: (context) => BrowseScreen(),
+
       },
 
       locale: Locale(languageProvider.appLanguage),
