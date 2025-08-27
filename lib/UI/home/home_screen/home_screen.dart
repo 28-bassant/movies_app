@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/UI/home/taps/prowse-tap/prowse-tap.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/user_provider.dart';
 import '../../../utils/app_assets.dart';
 import '../../../utils/app_colors.dart';
 import '../taps/home-tap/home-tap.dart';
@@ -18,7 +20,14 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> taps=[
     HomeTap(),SearchTap(),ProwseTap(),ProfileTap()
   ];
-   int selectedIndex=0;
+  int selectedIndex=0;
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Provider.of<UserProvider>(context, listen: false).loadUser();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
