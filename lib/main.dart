@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/UI/auth/forget_password/forget_password_screen.dart';
 import 'package:movies_app/UI/auth/login/login-screen.dart';
 import 'package:movies_app/UI/auth/update/update_screen.dart';
-import 'package:movies_app/UI/home/home_ui/browse_screen.dart';
+import 'package:movies_app/UI/home/taps/prowse-tap/browse_tab.dart';
 import 'package:movies_app/providers/app-language-provider.dart';
 import 'package:movies_app/providers/user_provider.dart';
 import 'package:movies_app/utils/app_routes.dart';

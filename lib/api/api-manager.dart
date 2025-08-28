@@ -44,7 +44,8 @@ class ApiManager {
     if (response.statusCode == 200) {
       return UserData.fromJson(responseData['data']);
     } else {
-      throw Exception(responseData["message"] ?? "Failed to load profile data.");
+      throw Exception(
+          responseData["message"] ?? "Failed to load profile data.");
     }
   }
 
@@ -83,6 +84,39 @@ class ApiManager {
       }
     } catch (e) {
       throw Exception("Error while registering: $e");
+    }
+  }
+
+  static Future<void> updateProfile(
+      String? name, String? phone, int? avaterId) async {
+    final Uri url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.profile}");
+    final updatedValues = <String, dynamic>{};
+    if (name != null) updatedValues['name'] = name;
+    if (phone != null) updatedValues['phone'] = phone;
+    if (avaterId != null) updatedValues['avatarId'] = avaterId;
+
+    try {
+      final token = await TokenStorage.getToken();
+      print('TOKEN => $token');
+      final response = await http.patch(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        },
+        body: jsonEncode(updatedValues),
+      );
+
+      print('====== UPDATE PROFILE API ======');
+      if (response.statusCode == 200) {
+        print("Profile updated successfully");
+        print("Response: ${response.body}");
+      } else {
+        print("Failed to update: ${response.statusCode}");
+        print("Error: ${response.body}");
+      }
+    } catch (e) {
+      print("Exception: $e");
     }
   }
 
