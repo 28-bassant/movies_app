@@ -403,6 +403,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Fantasy'**
   String get fantasy;
+
+  /// No description provided for @new_password.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get new_password;
+
+  /// No description provided for @update_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Password '**
+  String get update_password;
 }
 
 class _AppLocalizationsDelegate

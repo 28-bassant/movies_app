@@ -9,6 +9,7 @@ import 'package:movies_app/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
 import 'UI/auth/register/register_screen.dart';
+import 'UI/auth/reset_password/reset_password_screen.dart';
 import 'UI/home/home_screen/home_screen.dart';
 import 'UI/on_boarding/on_boarding_screen.dart';
 import 'app-prefrences/user_storage.dart';
@@ -43,6 +44,8 @@ class MyApp extends StatelessWidget {
         AppRoutes.forgetPasswordRouteName: (context) => ForgetPasswordScreen(),
         AppRoutes.updateRouteName: (context) => UpdateScreen(),
         AppRoutes.homeScreendRouteName: (context) => HomeScreen(),
+        AppRoutes.resetPasswordRouteName: (context) => ResetPasswordScreen(),
+
       },
       locale: Locale(languageProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,

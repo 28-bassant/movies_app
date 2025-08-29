@@ -27,6 +27,8 @@ class ApiManager {
     }
   }
 
+  static Future<void> restPassword(String newPassword,String confirmPassword) async {}
+
   static Future<UserData> fetchProfile(String token) async {
     Uri url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.profile}");
     final response = await http.get(

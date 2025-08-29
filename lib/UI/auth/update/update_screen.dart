@@ -133,7 +133,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
               SizedBox(height: height * .04),
               InkWell(
                 onTap: () {
-                  //todo: navigate to reset password screen
+                  Navigator.pushNamed(context, AppRoutes.resetPasswordRouteName);
                 },
                 child: Container(
                   alignment: Alignment.topLeft,

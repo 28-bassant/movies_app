@@ -160,4 +160,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get fantasy => 'Fantasy';
+
+  @override
+  String get new_password => 'New Password';
+
+  @override
+  String get update_password => 'Update Password ';
 }

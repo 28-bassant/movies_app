@@ -53,5 +53,7 @@
   "comedy": "Comedy",
   "drama": "Drama",
   "horror": "Horror",
-  "fantasy": "Fantasy"
+  "fantasy": "Fantasy",
+  "new_password": "New Password",
+  "update_password": "Update Password "
 }
