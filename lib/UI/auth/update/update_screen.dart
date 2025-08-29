@@ -36,12 +36,9 @@ class _UpdateScreenState extends State<UpdateScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final provider = Provider
-          .of<UserProvider>(context, listen: false);
+      final provider = Provider.of<UserProvider>(context, listen: false);
       print('UserProvider - UPDATE ====> ${provider.hashCode}');
-      var fetchedUser = Provider
-          .of<UserProvider>(context, listen: false)
-          .user;
+      var fetchedUser = Provider.of<UserProvider>(context, listen: false).user;
       print('====> $fetchedUser');
       if (fetchedUser == null) return;
       setState(() {
@@ -57,14 +54,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
   Widget build(BuildContext context) {
     userProvider = Provider.of<UserProvider>(context);
 
-    var height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    var width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: AppColors.blackBgColor,
@@ -78,11 +69,11 @@ class _UpdateScreenState extends State<UpdateScreen> {
         iconTheme: IconThemeData(color: AppColors.orangeColor),
       ),
       body:
-      // user == null
-      //     ? const Center(child: CircularProgressIndicator())
-      //     : SingleChildScrollView(
-      //   child:
-      Padding(
+          // user == null
+          //     ? const Center(child: CircularProgressIndicator())
+          //     : SingleChildScrollView(
+          //   child:
+          Padding(
         padding: EdgeInsets.symmetric(horizontal: width * .04),
         child: SingleChildScrollView(
           child: Column(
@@ -140,11 +131,16 @@ class _UpdateScreenState extends State<UpdateScreen> {
 
           
               SizedBox(height: height * .04),
-              Container(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  AppLocalizations.of(context)!.reset_password,
-                  style: AppStyles.regular20White,
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, AppRoutes.resetPasswordRouteName);
+                },
+                child: Container(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    AppLocalizations.of(context)!.reset_password,
+                    style: AppStyles.regular20White,
+                  ),
                 ),
               ),
               SizedBox(height: height * .25),
@@ -156,15 +152,14 @@ class _UpdateScreenState extends State<UpdateScreen> {
                     onPressed: () {
                       //todo : Delete Account
                       ApiManager.deleteAccount();
-                      DialogUtils.showMsg(context: context, msg: 'User Deleted Succeffully',
-                      posActionName: 'Ok',
-                      posAction:  (){
-                        Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            AppRoutes.loginRouteName,
-                        (route) => false
-                        );
-                      });
+                      DialogUtils.showMsg(
+                          context: context,
+                          msg: 'User Deleted Succeffully',
+                          posActionName: 'Ok',
+                          posAction: () {
+                            Navigator.pushNamedAndRemoveUntil(context,
+                                AppRoutes.loginRouteName, (route) => false);
+                          });
                     },
                     colorSide: AppColors.transparentColor,
                     textStyle: AppStyles.regular20White,
@@ -200,6 +195,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
       });
     }
   }
+
   void updateData() async {
     if (formKey.currentState?.validate() == true) {
 
@@ -213,9 +209,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
       avaterId: selectedIndex,
     );
 
-    await UserStorage.saveUser(updatedUser);
-    Provider.of<UserProvider>(context, listen: false).setUser(
-        updatedUser);
+    Provider.of<UserProvider>(context, listen: false).updateUser(updatedUser);
 
     Navigator.pop(context);
   }}

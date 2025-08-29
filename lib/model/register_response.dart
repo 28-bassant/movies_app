@@ -32,7 +32,7 @@ class UserData {
     name = json['name'];
     email = json['email'];
     phone = json['phone'];
-    avaterId = json['avatarId'];
+    avaterId = json['avaterId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -41,7 +41,7 @@ class UserData {
     map['name'] = name;
     map['email'] = email;
     map['phone'] = phone;
-    map['avatarId'] = avaterId;
+    map['avaterId'] = avaterId;
     return map;
   }
 

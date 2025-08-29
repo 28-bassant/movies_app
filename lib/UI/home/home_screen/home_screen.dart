@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/UI/home/taps/home-tap/home_tab.dart';
-import 'package:movies_app/UI/home/taps/prowse-tap/prowse-tap.dart';
+import 'package:movies_app/UI/home/taps/prowse-tap/browse_tab.dart';
 import 'package:provider/provider.dart';
-
 import '../../../providers/user_provider.dart';
 import '../../../utils/app_assets.dart';
 import '../../../utils/app_colors.dart';
-
 import '../taps/profile-tap/profile-tap.dart';
 import '../taps/search-tap/search-tap.dart';
 
@@ -18,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Widget> taps = [HomeTab(), SearchTap(), ProwseTap(), ProfileTap()];
+  List<Widget> taps = [HomeTab(), SearchTap(), BrowseTab(), ProfileTap()];
   int selectedIndex = 0;
 
   @override

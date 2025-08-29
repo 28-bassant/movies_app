@@ -3,14 +3,14 @@ import 'package:movies_app/UI/home/widgets/movie_type_tab_bar.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 
-class BrowseScreen extends StatefulWidget {
-  const BrowseScreen({super.key});
+class BrowseTab extends StatefulWidget {
+  const BrowseTab({super.key});
 
   @override
-  State<BrowseScreen> createState() => _BrowseScreenState();
+  State<BrowseTab> createState() => _BrowseTabState();
 }
 
-class _BrowseScreenState extends State<BrowseScreen> {
+class _BrowseTabState extends State<BrowseTab> {
   final List<String> movies = [
     AppAssets.movieImage,
     AppAssets.movieImage,
