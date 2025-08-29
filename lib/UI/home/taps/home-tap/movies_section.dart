@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_styles.dart';
 import 'api_model/movie.dart';
 import 'gener_movie_screen.dart';
 import 'movie_service.dart';
@@ -40,7 +41,7 @@ class _MoviesSectionState extends State<MoviesSection> {
         } else if (snapshot.hasError) {
           return Center(child: Text("Error: ${snapshot.error}"));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text("No movies found"));
+          return  Center(child: Text("No movies found",style:AppStyles.regular20White,));
         }
 
         final genreMovies = snapshot.data!

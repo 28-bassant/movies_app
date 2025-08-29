@@ -120,7 +120,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                             return AppLocalizations.of(
                               context,
                             )!.please_enter_phone_number;
-                          }if(text.length > 12){
+                          }if(text.length > 13){
                             return 'Please Enter a valid phone number';
                           }
                           return null;
