@@ -36,9 +36,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool obscure = true;
 
-  final GoogleSignIn googleSignIn = GoogleSignIn(
+final GoogleSignIn googleSignIn = GoogleSignIn(
     scopes: ['email'],
   );
+
 
   @override
   Widget build(BuildContext context) {
