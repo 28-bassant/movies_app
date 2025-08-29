@@ -36,9 +36,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool obscure = true;
 
-  final GoogleSignIn googleSignIn = GoogleSignIn(
+final GoogleSignIn googleSignIn = GoogleSignIn(
     scopes: ['email'],
   );
+
 
   @override
   Widget build(BuildContext context) {
@@ -293,44 +294,6 @@ class _LoginScreenState extends State<LoginScreen> {
         //todo:hide loading
         DialogUtils.hideLoading(context: context);
 
-        // if (response.message == "Success Login") {
-        //     if (response.token != null) {
-        //       await TokenStorage.saveToken(response.token!);
-        //
-        //       // if (response.user != null) {
-        //       //   final userProvider = Provider.of<UserProvider>(context, listen: false);
-        //   userProvider.setUser(response.user!);
-        //   await UserStorage.saveUser(response.user!); // ← THIS LINE IS ESSENTIAL
-        //       // }
-        //
-        //       // In your login method, add these prints:
-        //       print('LOGIN RESPONSE: ${response.message}');
-        //       print('USER DATA: ${response.user?.toJson()}');
-        //       print('TOKEN: ${response.token}');
-        //
-        //       if (response.user != null) {
-        //         print('ABOUT TO SAVE USER...');
-        //         await UserStorage.saveUser(response.user!);
-        //         print('USER SAVED SUCCESSFULLY');
-        //       }
-        //     }
-        //     //todo:success
-        //   //todo:show msg
-        //   DialogUtils.showMsg(
-        //       context: context,
-        //       title: "Success",
-        //       msg: "Login Successful",
-        //       posActionName: "OK",
-        //       posAction: () {
-        //         //todo:navigate to home
-        //         Navigator.pushNamedAndRemoveUntil(
-        //           context,
-        //           AppRoutes.homeScreendRouteName,
-        //               (route) => false,
-        //         );
-        //       }
-        //   );
-        // }
         if (response.message == "Success Login") {
           final token = response.token;
           if (token == null) return;

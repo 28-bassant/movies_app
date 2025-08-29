@@ -160,4 +160,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get fantasy => 'فانتازيا';
+
+  @override
+  String get new_password => 'كلمة المرور الجديدة';
+
+  @override
+  String get update_password => 'تحديث كلمة المرور ';
 }
