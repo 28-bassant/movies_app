@@ -28,8 +28,8 @@ class ApiManager {
     }
   }
 
-  static Future<void> restPassword(
-      String newPassword, String confirmPassword) async {}
+  static Future<void> restPassword(String newPassword,
+      String confirmPassword) async {}
 
   static Future<UserData> fetchProfile(String token) async {
     Uri url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.profile}");
@@ -53,14 +53,12 @@ class ApiManager {
     }
   }
 
-  static Future<RegisterResponse> register(
-    String email,
-    String name,
-    String password,
-    String confirmPassword,
-    String phone,
-    int avaterId,
-  ) async {
+  static Future<RegisterResponse> register(String email,
+      String name,
+      String password,
+      String confirmPassword,
+      String phone,
+      int avaterId,) async {
     Uri url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.register}");
 
     var data = {
@@ -91,8 +89,8 @@ class ApiManager {
     }
   }
 
-  static Future<void> updateProfile(
-      String? name, String? phone, int? avaterId) async {
+  static Future<void> updateProfile(String? name, String? phone,
+      int? avaterId) async {
     final Uri url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.profile}");
     final updatedValues = <String, dynamic>{};
     if (name != null) updatedValues['name'] = name;
@@ -147,10 +145,17 @@ class ApiManager {
     }
   }
 
-  static Future<MovieDetailsResponse?> getMovieDetailsByMovieId(int movieId) async {
-    Uri url = Uri.https(ApiConstants.movieDetailsBaseUrl,
-        ApiEndpoints.movieDetails, {
-      'movie_id': movieId.toString()});
+  static Future<MovieDetailsResponse?> getMovieDetailsByMovieId(
+      int movieId) async {
+    Uri url = Uri.https(
+      ApiConstants.movieDetailsBaseUrl,
+      ApiEndpoints.movieDetails,
+      {
+        'movie_id': movieId.toString(),
+        'with_images': 'true',
+        'with_cast': 'true',
+      },
+    );
 
     try {
       var response = await http.get(url);

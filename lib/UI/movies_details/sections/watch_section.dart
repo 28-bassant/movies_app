@@ -110,7 +110,7 @@ class _WatchSectionState extends State<WatchSection> {
                             child: Image(image: AssetImage(AppAssets.playVideoImage))),
                         SizedBox(height: height * .2,),
 
-                        Text(widget.movieDetails!.title ?? '',style: AppStyles.bold24White,textAlign: TextAlign.center,),
+                        Text(widget.movieDetails!.title?? '',style: AppStyles.bold24White,textAlign: TextAlign.center,),
                         SizedBox(height: height * .02,),
                         Text('${widget.movieDetails!.year ?? ''}',style: AppStyles.bold20Grey,textAlign: TextAlign.center,),
 

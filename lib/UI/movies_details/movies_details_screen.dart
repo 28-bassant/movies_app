@@ -115,7 +115,8 @@ late var args;
                         movie.largeScreenshotImage2 != null &&
                         movie.largeScreenshotImage3 != null) ?
                         ScreenshotsSection(movieDetails: movie) :
-                        SizedBox(height: height * .04,)
+                        SizedBox(height: height * .04,),
+
                           ],
                         )
                       ],
@@ -145,6 +146,7 @@ late var args;
     print("Medium Screenshot 1: ${movieDetails?.mediumScreenshotImage1}");
     print("Medium Screenshot 2: ${movieDetails?.mediumScreenshotImage2}");
     print("Medium Screenshot 3: ${movieDetails?.mediumScreenshotImage3}");
+    print("Cast: ${movieDetails?.cast}");
   }
 
 }
