@@ -149,15 +149,19 @@ class ApiManager {
 
   static Future<MovieDetailsResponse?> getMovieDetailsByMovieId(int movieId) async {
     Uri url = Uri.https(ApiConstants.movieDetailsBaseUrl,
-        ApiEndpoints.movieDetails, {'movie_id': movieId.toString()});
+        ApiEndpoints.movieDetails, {
+      'movie_id': movieId.toString()});
 
     try {
       var response = await http.get(url);
       var responseBody = response.body;
       var json = jsonDecode(responseBody);
+      print("Parsed movie: ${json['data']['movie']}");
       return MovieDetailsResponse.fromJson(json);
     } catch (e) {
       throw e;
     }
   }
 }
+
+

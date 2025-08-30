@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ScreenshotCustomWidget extends StatelessWidget {
@@ -7,11 +8,12 @@ class ScreenshotCustomWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  ClipRRect(
-      borderRadius: BorderRadius.circular(16),
-      child: Image.network(
-        image,
-        fit: BoxFit.cover,
+      child: CachedNetworkImage(
+        imageUrl: image ?? '',
+        placeholder: (context, url) => CircularProgressIndicator(),
+        errorWidget: (context, url, error) => Icon(Icons.error),
       ),
+      borderRadius: BorderRadius.circular(16),
     );
   }
 }

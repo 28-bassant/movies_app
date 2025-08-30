@@ -1,3 +1,4 @@
+
 class MovieDetailsResponse {
   MovieDetailsResponse({
       this.status, 
@@ -110,6 +111,8 @@ class MovieDetails {
     largeScreenshotImage1 = json['large_screenshot_image1'];
     largeScreenshotImage2 = json['large_screenshot_image2'];
     largeScreenshotImage3 = json['large_screenshot_image3'];
+
+
     if (json['cast'] != null) {
       cast = [];
       json['cast'].forEach((v) {

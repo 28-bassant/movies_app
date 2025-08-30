@@ -1,4 +1,5 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/UI/home/taps/home-tap/api_model/movie.dart';
 import 'package:movies_app/UI/movies_details/sections/screenshots_section.dart';
@@ -19,11 +20,21 @@ class MoviesDetailsScreen extends StatefulWidget {
 }
 
 class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
+late var args;
 
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        fetchMovie();
+      },
+    );
+  }
   @override
-
   Widget build(BuildContext context) {
-    var args = ModalRoute.of(context)?.settings.arguments as int;
+     args = ModalRoute.of(context)?.settings.arguments as int;
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
@@ -83,6 +94,7 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
             else{
               print("Movie ID success: ${args}");
               final movie = snapshot.data?.data?.movie;
+
       
               return SingleChildScrollView(
                 child: Column(
@@ -96,7 +108,16 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
                         ),
                     child: Column(
                       children: [
-                        ScreenshotsSection(movieDetails: movie!,)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            (movie.largeScreenshotImage1 != null &&
+                        movie.largeScreenshotImage2 != null &&
+                        movie.largeScreenshotImage3 != null) ?
+                        ScreenshotsSection(movieDetails: movie) :
+                        SizedBox(height: height * .04,)
+                          ],
+                        )
                       ],
                     ),
                     )
@@ -109,4 +130,21 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
       ),
     );
   }
+  void fetchMovie() async {
+    var response = await ApiManager.getMovieDetailsByMovieId(args);
+
+    // Access the MovieDetails object
+    var movieDetails = response?.data?.movie;
+
+    // Print the screenshot URLs
+    print("Large Screenshot 1: ${movieDetails?.largeScreenshotImage1}");
+    print("Large Screenshot 2: ${movieDetails?.largeScreenshotImage2}");
+    print("Large Screenshot 3: ${movieDetails?.largeScreenshotImage3}");
+
+    // Optional: print medium screenshots too
+    print("Medium Screenshot 1: ${movieDetails?.mediumScreenshotImage1}");
+    print("Medium Screenshot 2: ${movieDetails?.mediumScreenshotImage2}");
+    print("Medium Screenshot 3: ${movieDetails?.mediumScreenshotImage3}");
+  }
+
 }
