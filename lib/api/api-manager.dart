@@ -4,6 +4,7 @@ import 'package:movies_app/api/api-endpoints.dart';
 import 'package:movies_app/model/register_response.dart';
 import '../app-prefrences/token-storage.dart';
 import '../model/login-response.dart';
+import '../model/movie_details_response.dart';
 import 'api-constant.dart';
 
 class ApiManager {
@@ -27,7 +28,8 @@ class ApiManager {
     }
   }
 
-  static Future<void> restPassword(String newPassword,String confirmPassword) async {}
+  static Future<void> restPassword(
+      String newPassword, String confirmPassword) async {}
 
   static Future<UserData> fetchProfile(String token) async {
     Uri url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.profile}");
@@ -142,6 +144,20 @@ class ApiManager {
       print("Account Deleted: ${responseJson['message']}");
     } else {
       throw Exception("Failed to delete account: ${response.body}");
+    }
+  }
+
+  static Future<MovieDetailsResponse?> getMovieDetailsByMovieId(int movieId) async {
+    Uri url = Uri.https(ApiConstants.movieDetailsBaseUrl,
+        ApiEndpoints.movieDetails, {'movie_id': movieId.toString()});
+
+    try {
+      var response = await http.get(url);
+      var responseBody = response.body;
+      var json = jsonDecode(responseBody);
+      return MovieDetailsResponse.fromJson(json);
+    } catch (e) {
+      throw e;
     }
   }
 }

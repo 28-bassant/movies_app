@@ -55,5 +55,7 @@
   "horror": "Horror",
   "fantasy": "Fantasy",
   "new_password": "New Password",
-  "update_password": "Update Password "
+  "update_password": "Update Password ",
+  "something_went_wrong": "Something Went Wrong ",
+  "try_again": "Try Again "
 }

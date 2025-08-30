@@ -23,73 +23,76 @@ class _HomeTabState extends State<HomeTab> {
 
     return Scaffold(
       backgroundColor: AppColors.blackBgColor,
-      body: Stack(
-        children: [
-
-          Positioned.fill(
-            child: selectedMovie != null
-                ? Image.network(
-              selectedMovie!.image,
-              fit: BoxFit.cover,
-            )
-                : Image.asset(
-              AppAssets.homeTabImage,
-              fit: BoxFit.cover,
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            
+            Positioned.fill(
+              child: selectedMovie != null
+                  ? Image.network(
+                selectedMovie!.image,
+                fit: BoxFit.cover,
+              )
+                  : Image.asset(
+                AppAssets.homeTabImage,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.black.withOpacity(0.7),
-                  Colors.black.withOpacity(0.5),
-                  Colors.black.withOpacity(0.9),
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.black.withOpacity(0.7),
+                    Colors.black.withOpacity(0.5),
+                    Colors.black.withOpacity(0.9),
+                  ],
+                ),
+              ),
+            ),
+            SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      SizedBox(height: height * 0.01),
+            
+            
+                      Image.asset(
+                        AppAssets.availableNow,
+                        height: height * 0.1,
+                        fit: BoxFit.fitWidth,
+                      ),
+            
+                      // Movies Carousel + callback
+                      MoviesCarousel(
+                        onMovieSelected: (movie) {
+                          setState(() {
+                            selectedMovie = movie;
+                          });
+                        },
+                      ),
+            
+                      SizedBox(height: height * 0.02),
+            
+            
+                      Image.asset(
+                        AppAssets.watchNow,
+                        height: height * 0.15,
+                        fit: BoxFit.fitWidth,
+                      ),
+                      MoviesSection(),
+                      SizedBox(height: height * .1,)
+                    ],
+                  ),
                 ],
               ),
             ),
-          ),
-          SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    SizedBox(height: height * 0.01),
-
-
-                    Image.asset(
-                      AppAssets.availableNow,
-                      height: height * 0.1,
-                      fit: BoxFit.fitWidth,
-                    ),
-
-                    // Movies Carousel + callback
-                    MoviesCarousel(
-                      onMovieSelected: (movie) {
-                        setState(() {
-                          selectedMovie = movie;
-                        });
-                      },
-                    ),
-
-                    SizedBox(height: height * 0.02),
-
-
-                    Image.asset(
-                      AppAssets.watchNow,
-                      height: height * 0.15,
-                      fit: BoxFit.fitWidth,
-                    ),
-                    MoviesSection(),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

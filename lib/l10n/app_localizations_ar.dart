@@ -166,4 +166,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get update_password => 'تحديث كلمة المرور ';
+
+  @override
+  String get something_went_wrong => 'حدث خطأ ما';
+
+  @override
+  String get try_again => 'حاول مجددا';
 }
