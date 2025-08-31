@@ -24,21 +24,12 @@ class ScreenshotsSection extends StatelessWidget {
           style: AppStyles.bold24White,
         ),
         SizedBox(height: height * .02),
-        ClipRRect(
-          child: ClipRRect(
-            child: CachedNetworkImage(
-              imageUrl: movieDetails.largeScreenshotImage1 ?? '',
-              placeholder: (context, url) => CircularProgressIndicator(),
-              errorWidget: (context, url, error) => Icon(Icons.error),
-            ),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          borderRadius: BorderRadius.circular(8),
+        ScreenshotCustomWidget(
+          image: movieDetails?.largeScreenshotImage1 ?? '',
         ),
         SizedBox(height: height * .02),
         ScreenshotCustomWidget(
-          image:
-              'https://yts.mx/assets/images/movies/16_Blocks_2006/large-screenshot1.jpg',
+          image: movieDetails?.largeScreenshotImage2 ?? '',
         ),
         SizedBox(height: height * .02),
         ScreenshotCustomWidget(
