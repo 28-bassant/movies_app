@@ -59,7 +59,9 @@
           "summary": "الملخص",
           "name": "الاسم",
           "character": "الشخصية",
-          "no_description":"لا يوجد وصف متاح"
+          "no_description":"لا يوجد وصف متاح",
+          "no_movies": "لا يوجد افلام",
+          "search_movies": "البحث عن الافلام"
 
 
 

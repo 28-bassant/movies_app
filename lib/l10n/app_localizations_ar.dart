@@ -178,4 +178,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get no_description => 'لا يوجد وصف متاح';
+
+  @override
+  String get no_movies => 'لا يوجد افلام';
+
+  @override
+  String get search_movies => 'البحث عن الافلام';
 }
