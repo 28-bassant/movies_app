@@ -52,5 +52,15 @@
   "horror": "رعب",
   "fantasy": "فانتازيا",
   "new_password": "كلمة المرور الجديدة",
-  "update_password": "تحديث كلمة المرور "
+  "update_password": "تحديث كلمة المرور ",
+  "something_went_wrong": "حدث خطأ ما",
+    "try_again": "حاول مجددا",
+          "cast": "الممثلين",
+          "summary": "الملخص",
+          "name": "الاسم",
+          "character": "الشخصية",
+          "no_description":"لا يوجد وصف متاح"
+
+
+
 }

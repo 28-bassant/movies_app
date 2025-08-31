@@ -36,9 +36,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool obscure = true;
 
-final GoogleSignIn googleSignIn = GoogleSignIn(
-    scopes: ['email'],
-  );
+// final GoogleSignIn googleSignIn = GoogleSignIn(
+//     scopes: ['email'],
+//   );
 
 
   @override
@@ -198,7 +198,7 @@ final GoogleSignIn googleSignIn = GoogleSignIn(
                         ),
                         CustomElevatedButton(
                             onPressed: () {
-                              loginWithGoogle(context);
+                              // loginWithGoogle(context);
                             },
                             text: AppLocalizations.of(context)!.loginWithGoogle,
                             textStyle: AppStyles.regular16Black,
@@ -294,6 +294,44 @@ final GoogleSignIn googleSignIn = GoogleSignIn(
         //todo:hide loading
         DialogUtils.hideLoading(context: context);
 
+        // if (response.message == "Success Login") {
+        //     if (response.token != null) {
+        //       await TokenStorage.saveToken(response.token!);
+        //
+        //       // if (response.user != null) {
+        //       //   final userProvider = Provider.of<UserProvider>(context, listen: false);
+        //   userProvider.setUser(response.user!);
+        //   await UserStorage.saveUser(response.user!); // ← THIS LINE IS ESSENTIAL
+        //       // }
+        //
+        //       // In your login method, add these prints:
+        //       print('LOGIN RESPONSE: ${response.message}');
+        //       print('USER DATA: ${response.user?.toJson()}');
+        //       print('TOKEN: ${response.token}');
+        //
+        //       if (response.user != null) {
+        //         print('ABOUT TO SAVE USER...');
+        //         await UserStorage.saveUser(response.user!);
+        //         print('USER SAVED SUCCESSFULLY');
+        //       }
+        //     }
+        //     //todo:success
+        //   //todo:show msg
+        //   DialogUtils.showMsg(
+        //       context: context,
+        //       title: "Success",
+        //       msg: "Login Successful",
+        //       posActionName: "OK",
+        //       posAction: () {
+        //         //todo:navigate to home
+        //         Navigator.pushNamedAndRemoveUntil(
+        //           context,
+        //           AppRoutes.homeScreendRouteName,
+        //               (route) => false,
+        //         );
+        //       }
+        //   );
+        // }
         if (response.message == "Success Login") {
           final token = response.token;
           if (token == null) return;
@@ -349,37 +387,37 @@ final GoogleSignIn googleSignIn = GoogleSignIn(
     }
   }
 
-  Future loginWithGoogle(BuildContext context) async {
-    try {
-      final account = await googleSignIn.signIn();
-      if (account != null) {
-        DialogUtils.showMsg(
-          context: context,
-          title: "Success",
-          msg: "Welcome, ${account.displayName}",
-          posActionName: "OK",
-          posAction: () {
-            // TODO: Navigate to home
-          },
-        );
-        debugPrint("User Email: ${account.email}");
-        debugPrint("User Name: ${account.displayName}");
-        debugPrint("User ID: ${account.id}");
-      } else {
-        DialogUtils.showMsg(
-          context: context,
-          title: "Cancelled",
-          msg: "Google login was cancelled",
-          posActionName: "OK",
-        );
-      }
-    } catch (e) {
-      DialogUtils.showMsg(
-        context: context,
-        title: "Error",
-        msg: "Google login failed: $e",
-        posActionName: "OK",
-      );
-    }
-  }
+  // Future loginWithGoogle(BuildContext context) async {
+  //   try {
+  //     final account = await googleSignIn.signIn();
+  //     if (account != null) {
+  //       DialogUtils.showMsg(
+  //         context: context,
+  //         title: "Success",
+  //         msg: "Welcome, ${account.displayName}",
+  //         posActionName: "OK",
+  //         posAction: () {
+  //           // TODO: Navigate to home
+  //         },
+  //       );
+  //       debugPrint("User Email: ${account.email}");
+  //       debugPrint("User Name: ${account.displayName}");
+  //       debugPrint("User ID: ${account.id}");
+  //     } else {
+  //       DialogUtils.showMsg(
+  //         context: context,
+  //         title: "Cancelled",
+  //         msg: "Google login was cancelled",
+  //         posActionName: "OK",
+  //       );
+  //     }
+  //   } catch (e) {
+  //     DialogUtils.showMsg(
+  //       context: context,
+  //       title: "Error",
+  //       msg: "Google login failed: $e",
+  //       posActionName: "OK",
+  //     );
+  //   }
+  // }
 }

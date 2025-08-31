@@ -27,10 +27,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get similar => 'مشابه';
 
   @override
-  String get summary => 'ملخص';
+  String get summary => 'الملخص';
 
   @override
-  String get cast => 'طاقم العمل';
+  String get cast => 'الممثلين';
 
   @override
   String get genres => 'الأنواع';
@@ -166,4 +166,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get update_password => 'تحديث كلمة المرور ';
+
+  @override
+  String get something_went_wrong => 'حدث خطأ ما';
+
+  @override
+  String get try_again => 'حاول مجددا';
+
+  @override
+  String get character => 'الشخصية';
+
+  @override
+  String get no_description => 'لا يوجد وصف متاح';
 }

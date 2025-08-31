@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:movies_app/utils/app_routes.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_styles.dart';
 import 'api_model/movie.dart';
@@ -99,55 +100,61 @@ class _MoviesSectionState extends State<MoviesSection> {
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   itemBuilder: (context, index) {
                     final movie = genreMovies[index];
-                    return Container(
-                      width: 130,
-                      margin: const EdgeInsets.only(right: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Stack(
-                              children:[ Image.network(
-                                movie.image,
-                                height: 180,
-                                width: 130,
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) => Container(
+                    return InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRoutes.movieDetailsScreenRouteName,
+                        arguments: movie.id);
+                      },
+                      child: Container(
+                        width: 130,
+                        margin: const EdgeInsets.only(right: 12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Stack(
+                                children:[ Image.network(
+                                  movie.image,
                                   height: 180,
                                   width: 130,
-                                  color: Colors.grey.shade800,
-                                  child: const Icon(Icons.broken_image, color: Colors.white),
-                                ),
-                              ),
-                                Positioned(
-                                  top: 12,
-                                  left: 12,
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.blackBgColor,
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          movie.rating.toString(),
-                                          style: const TextStyle(
-                                            color: AppColors.whiteColor,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        const SizedBox(width: 4),
-                                        const Icon(Icons.star, color: AppColors.yellowColor, size: 16),
-                                      ],
-                                    ),
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) => Container(
+                                    height: 180,
+                                    width: 130,
+                                    color: Colors.grey.shade800,
+                                    child: const Icon(Icons.broken_image, color: Colors.white),
                                   ),
                                 ),
+                                  Positioned(
+                                    top: 12,
+                                    left: 12,
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.blackBgColor,
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            movie.rating.toString(),
+                                            style: const TextStyle(
+                                              color: AppColors.whiteColor,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 4),
+                                          const Icon(Icons.star, color: AppColors.yellowColor, size: 16),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
 
-                            ]),
-                          ),
-                        ],
+                              ]),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
