@@ -439,6 +439,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No description available'**
   String get no_description;
+
+  /// No description provided for @no_movies.
+  ///
+  /// In en, this message translates to:
+  /// **'No Movies Found'**
+  String get no_movies;
 }
 
 class _AppLocalizationsDelegate

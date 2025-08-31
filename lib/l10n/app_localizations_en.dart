@@ -178,4 +178,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get no_description => 'No description available';
+
+  @override
+  String get no_movies => 'No Movies Found';
 }
