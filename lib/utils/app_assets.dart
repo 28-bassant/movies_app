@@ -44,4 +44,8 @@ class AppAssets {
   static const String availableNow = 'assets/images/available_now.png';
   static const String watchNow = 'assets/images/watch_now.png';
   static const String homeTabImage = 'assets/images/home_tab_image.png';
+  static const String playVideoImage = 'assets/images/play_video_image.png';
+  static const String favIconImage = 'assets/images/fav_icon.png';
+  static const String timeIconImage = 'assets/images/time_icon.png';
+  static const String rateIconImage = 'assets/images/rate_icon.png';
 }
