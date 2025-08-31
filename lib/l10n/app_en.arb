@@ -63,6 +63,7 @@
       "name": "Name",
       "character": "Character",
       "no_description": "No description available",
-      "no_movies": "No Movies Found"
+      "no_movies": "No Movies Found",
+      "search_movies": "Search For Movies"
 
 }

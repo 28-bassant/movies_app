@@ -181,4 +181,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get no_movies => 'No Movies Found';
+
+  @override
+  String get search_movies => 'Search For Movies';
 }

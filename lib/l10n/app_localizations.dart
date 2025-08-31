@@ -445,6 +445,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Movies Found'**
   String get no_movies;
+
+  /// No description provided for @search_movies.
+  ///
+  /// In en, this message translates to:
+  /// **'Search For Movies'**
+  String get search_movies;
 }
 
 class _AppLocalizationsDelegate

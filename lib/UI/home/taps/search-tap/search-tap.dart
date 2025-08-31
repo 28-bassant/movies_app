@@ -3,9 +3,14 @@ import 'package:movies_app/UI/auth/widgets/custom-text-form-field.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../utils/app_assets.dart';
+import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_routes.dart';
 import '../home-tap/api_model/movie.dart';
 import '../home-tap/movie_service.dart';
+import 'cubit/search-state.dart';
+import 'cubit/search-view-model.dart';
 import 'movie-grid-item.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchTap extends StatefulWidget {
   const SearchTap({super.key});
@@ -15,15 +20,23 @@ class SearchTap extends StatefulWidget {
 }
 
 class _SearchTapState extends State<SearchTap> {
-  TextEditingController searchController = TextEditingController();
-  List<Movie> movies = [];
-  bool isLoading = false;
+  late TextEditingController searchController;
 
+  @override
+  void initState() {
+    super.initState();
+    searchController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
@@ -36,57 +49,68 @@ class _SearchTapState extends State<SearchTap> {
                 prefixIcon: Image(image: AssetImage(AppAssets.searchIcon,))
                 ,controller: searchController ,
                 onChanged: (value) {
-                  searchMovies(value);
+                  context.read<SearchViewModel>().searchMovies(value);
                 },
-              ),SizedBox(height: height*.02),
+              ),
+              SizedBox(height: height * .02),
               Expanded(
-                child: isLoading
-                    ? const Center(child: CircularProgressIndicator(color: Colors.yellow))
-                    : movies.isEmpty
-                    ? Center(child:
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(AppAssets.emptyIcon),
-                    SizedBox(height: height*.02),
-                    Text(AppLocalizations.of(context)!.no_movies, style: AppStyles.regular16White
-                    )],
-                    ))
-                    : GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                     crossAxisCount: 2,
-                    crossAxisSpacing: width * 0.03,
-                    mainAxisSpacing: height * 0.02,
-                    childAspectRatio: .80,
-                      ),
-                      itemCount: movies.length,
-                      itemBuilder: (context, index) {
-                    return MovieGridItem(movie: movies[index]);
-                                      },
-                                    ),
-              )
+                child: BlocBuilder<SearchViewModel, SearchState>(
+                  builder: (context, state) {
+
+                    if (state is SearchLoading) {
+                      return const Center(
+                          child: CircularProgressIndicator(
+                              color: AppColors.orangeColor));
+                    }
+                    else if (state is SearchEmpty) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(AppAssets.emptyIcon),
+                            SizedBox(height: height * .02),
+                            Text(AppLocalizations.of(context)!.no_movies,
+                                style: AppStyles.regular16White),
+                          ],
+                        ),
+                      );
+                    }
+                    else if (state is SearchLoaded) {
+                      return GridView.builder(
+                        gridDelegate:
+                        SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: width * 0.03,
+                          mainAxisSpacing: height * 0.02,
+                          childAspectRatio: .80,
+                        ),
+                        itemCount: state.movies.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: (){
+                              Navigator.pushNamed(context, AppRoutes.movieDetailsScreenRouteName,
+                                  arguments: state.movies[index].id);
+
+                            }, child:MovieGridItem(movie: state.movies[index]));
+                        },
+                      );
+                    }
+                    else if (state is SearchError) {
+                      return Center(
+                          child: Text(state.message,
+                              style: AppStyles.regular16White));
+                    }
+                    return Center(
+                      child: Text(AppLocalizations.of(context)!.search_movies,
+                          style: AppStyles.bold20White),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
-  }
-
-  void searchMovies(String query) async {
-    setState(() {
-      isLoading = true;
-    });
-    try {
-      final results = await MovieService.fetchMovies(query: query);
-      setState(() {
-        movies = results;
-      });
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error: $e")));
-    } finally {
-      setState(() {
-        isLoading = false;
-      });
-    }
   }
 }
