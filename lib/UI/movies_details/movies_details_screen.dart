@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/UI/home/taps/home-tap/api_model/movie.dart';
 import 'package:movies_app/UI/movies_details/sections/cast-section.dart';
 import 'package:movies_app/UI/movies_details/sections/screenshots_section.dart';
+import 'package:movies_app/UI/movies_details/sections/similar_movie_section.dart';
 import 'package:movies_app/UI/movies_details/sections/watch_section.dart';
 import 'package:movies_app/api/api-manager.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
@@ -12,7 +13,8 @@ import 'package:movies_app/utils/app_styles.dart';
 import '../../model/movie_details_response.dart';
 import '../../model/movie_details_response.dart' as summary;
 class MoviesDetailsScreen extends StatefulWidget {
-  MoviesDetailsScreen({super.key});
+  final int movieId;
+  MoviesDetailsScreen({super.key , required this.movieId});
 
   @override
   State<MoviesDetailsScreen> createState() => _MoviesDetailsScreenState();
@@ -23,9 +25,9 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
   @override
 
   Widget build(BuildContext context) {
-    var args = ModalRoute.of(context)?.settings.arguments as int;
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    var args = widget.movieId;
 
     return SafeArea(
       child: Scaffold(
@@ -96,6 +98,7 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ScreenshotsSection(movieDetails: movie!),
+                            SimilarMoviesSection(movieId:movie.id!),
                             Text(
                                 AppLocalizations.of(context)!.summary,
                               style: AppStyles.bold24White
@@ -107,7 +110,8 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
                                     : AppLocalizations.of(context)!.no_description,
                               style: AppStyles.regular16White
                             ),SizedBox(height: height * .02),
-                            CastSection(castList: movie.cast,)
+                            CastSection(castList: movie.cast,),
+
 
                        ])
                       )

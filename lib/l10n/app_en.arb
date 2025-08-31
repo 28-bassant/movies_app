@@ -62,6 +62,9 @@
       "summary": "Summary",
       "name": "Name",
       "character": "Character",
-      "no_description": "No description available"
+      "no_description": "No description available",
+      "similar" : "Similar",
+      "genres" : "Genres"
+
 
 }

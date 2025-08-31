@@ -59,7 +59,10 @@
           "summary": "الملخص",
           "name": "الاسم",
           "character": "الشخصية",
-          "no_description":"لا يوجد وصف متاح"
+          "no_description":"لا يوجد وصف متاح",
+          "similar" : "الافلام المشايهة",
+          "genres" : "التصنيف"
+
 
 
 
