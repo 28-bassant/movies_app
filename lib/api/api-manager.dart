@@ -148,8 +148,15 @@ class ApiManager {
   }
 
   static Future<MovieDetailsResponse?> getMovieDetailsByMovieId(int movieId) async {
-    Uri url = Uri.https(ApiConstants.movieDetailsBaseUrl,
-        ApiEndpoints.movieDetails, {'movie_id': movieId.toString()});
+    Uri url = Uri.https(
+      ApiConstants.movieDetailsBaseUrl,
+      ApiEndpoints.movieDetails,
+      {
+        'movie_id': movieId.toString(),
+        'with_images': 'true',
+        'with_cast': 'true',
+      },
+    );
 
     try {
       var response = await http.get(url);

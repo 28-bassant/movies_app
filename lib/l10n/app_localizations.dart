@@ -427,6 +427,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Try Again '**
   String get try_again;
+
+  /// No description provided for @character.
+  ///
+  /// In en, this message translates to:
+  /// **'Character'**
+  String get character;
+
+  /// No description provided for @no_description.
+  ///
+  /// In en, this message translates to:
+  /// **'No description available'**
+  String get no_description;
 }
 
 class _AppLocalizationsDelegate

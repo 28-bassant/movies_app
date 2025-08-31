@@ -57,5 +57,11 @@
   "new_password": "New Password",
   "update_password": "Update Password ",
   "something_went_wrong": "Something Went Wrong ",
-  "try_again": "Try Again "
+  "try_again": "Try Again ",
+  "cast": "Cast",
+      "summary": "Summary",
+      "name": "Name",
+      "character": "Character",
+      "no_description": "No description available"
+
 }
