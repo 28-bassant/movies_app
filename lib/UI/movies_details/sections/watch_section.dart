@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/UI/auth/widgets/custom-elevated-button.dart';
 import 'package:movies_app/UI/movies_details/sections/custom_widget/watch_custom_widget.dart';
+import 'package:movies_app/UI/movies_details/sections/trailer_player.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/model/movie_details_response.dart';
 import 'package:movies_app/utils/app_assets.dart';
@@ -19,6 +20,7 @@ class WatchSection extends StatefulWidget {
 
 class _WatchSectionState extends State<WatchSection> {
   bool isSelected = false;
+  bool isClicked = false;
   Future<void> _launchURL(String urlString) async {
     if (urlString.isEmpty) return;
 
@@ -41,10 +43,42 @@ class _WatchSectionState extends State<WatchSection> {
 
     return Column(
       children: [
+        isClicked ?
+        Stack(
+            children: [
+              TrailerPlayer(ytTrailerCode: widget.movieDetails.ytTrailerCode ?? ''),
+              Padding(padding: EdgeInsets.symmetric(
+                vertical: height * .04,
+                horizontal: width * .04
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: () =>Navigator.pop(context),
+                    child: Icon(Icons.arrow_back_ios_new,color: AppColors.whiteColor,size:30),
+
+                  ),
+                  InkWell(
+                    onTap: () {
+                      isSelected = !(isSelected);
+                      //todo : Add to WishList
+                      setState(() {
+
+                      });
+
+                    },
+                    child: Icon(isSelected ? Icons.bookmark : Icons.bookmark_border_outlined,color: AppColors.whiteColor,size: 35,),
+                  )
+                ],
+              ),
+              )
+
+            ],
+        ):
         Stack(
           clipBehavior: Clip.none,
           children: [
-            // Image
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: Image.network(
@@ -52,7 +86,6 @@ class _WatchSectionState extends State<WatchSection> {
                 fit: BoxFit.cover,
               ),
             ),
-            // Bottom shadow overlay
             Positioned.fill(
               child: Align(
                 alignment: Alignment.bottomCenter,
@@ -107,7 +140,14 @@ class _WatchSectionState extends State<WatchSection> {
                             onTap: (){
                               //todo : Play demo
                             },
-                            child: Image(image: AssetImage(AppAssets.playVideoImage))),
+                            child: InkWell(
+                                onTap: () {
+                                  isClicked = !(isClicked);
+                                  setState(() {
+
+                                  });
+                                },
+                                child: Image(image: AssetImage(AppAssets.playVideoImage)))),
                         SizedBox(height: height * .2,),
 
                         Text(widget.movieDetails!.title ?? '',style: AppStyles.bold24White,textAlign: TextAlign.center,),
@@ -123,6 +163,7 @@ class _WatchSectionState extends State<WatchSection> {
 
           ],
         ),
+        SizedBox(height: height * .04,),
         Padding(
           padding:  EdgeInsets.symmetric(horizontal: width * .04),
           child: Column(
