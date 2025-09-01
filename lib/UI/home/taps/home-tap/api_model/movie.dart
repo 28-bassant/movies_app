@@ -3,7 +3,8 @@ class Movie {
   final String year;
   final String image;
   final double rating;
-  final List<String> genres;  
+  final List<String> genres;
+  num? id;
 
   Movie({
     required this.title,
@@ -11,6 +12,7 @@ class Movie {
     required this.image,
     required this.rating,
     required this.genres,
+    required this.id
   });
 
   factory Movie.fromJson(Map<String, dynamic> json) {
@@ -25,6 +27,7 @@ class Movie {
       image: json['medium_cover_image'] ?? "",
       rating: (json['rating'] is num) ? (json['rating'] as num).toDouble() : 0.0,
       genres: extractedGenres,
+      id: json['id']
     );
   }
 }

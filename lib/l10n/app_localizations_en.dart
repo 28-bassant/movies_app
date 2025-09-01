@@ -166,4 +166,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get update_password => 'Update Password ';
+
+  @override
+  String get something_went_wrong => 'Something Went Wrong ';
+
+  @override
+  String get try_again => 'Try Again ';
+
+  @override
+  String get character => 'Character';
+
+  @override
+  String get no_description => 'No description available';
+
+  @override
+  String get no_movies => 'No Movies Found';
+
+  @override
+  String get search_movies => 'Search For Movies';
 }

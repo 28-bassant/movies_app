@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:movies_app/utils/app_routes.dart';
 
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_styles.dart';
@@ -64,6 +65,9 @@ class _MoviesCarouselState extends State<MoviesCarousel> {
             return GestureDetector(
                 onTap: () {
                  // todo: Navigate to details screen
+                  Navigator.pushNamed(
+                    context, AppRoutes.movieDetailsScreenRouteName,
+                    arguments: movie.id);
                 },
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 400),

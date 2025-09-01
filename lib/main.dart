@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/UI/auth/forget_password/forget_password_screen.dart';
 import 'package:movies_app/UI/auth/login/login-screen.dart';
 import 'package:movies_app/UI/auth/update/update_screen.dart';
+import 'package:movies_app/UI/movies_details/movies_details_screen.dart';
 import 'package:movies_app/providers/app-language-provider.dart';
 import 'package:movies_app/providers/user_provider.dart';
 import 'package:movies_app/utils/app_routes.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
     var languageProvider = Provider.of<LanguageProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.onBoardingRouteName,
+      initialRoute: AppRoutes.loginRouteName,
       routes: {
         AppRoutes.onBoardingRouteName: (context) => OnboardingScreen(),
         AppRoutes.loginRouteName: (context) => LoginScreen(),
@@ -44,6 +45,11 @@ class MyApp extends StatelessWidget {
         AppRoutes.updateRouteName: (context) => UpdateScreen(),
         AppRoutes.homeScreendRouteName: (context) => HomeScreen(),
         AppRoutes.resetPasswordRouteName: (context) => ResetPasswordScreen(),
+        AppRoutes.movieDetailsScreenRouteName: (context) {
+          final movieId = ModalRoute.of(context)!.settings.arguments as int;
+          return MoviesDetailsScreen(movieId: movieId);
+        },
+
 
       },
       locale: Locale(languageProvider.appLanguage),

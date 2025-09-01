@@ -7,6 +7,7 @@ static const String forgetPasswordRouteName = 'forgetPasswordScreen';
 static const String homeScreendRouteName = 'homeScreen';
 static const String browseScreenRouteName = 'browseScreen';
 static const String resetPasswordRouteName = 'resetPasswordScreen';
+static const String movieDetailsScreenRouteName = 'movieDetailsScreen';
 
 
 
