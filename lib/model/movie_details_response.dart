@@ -125,7 +125,7 @@ class MovieDetails {
     dateUploaded = json['date_uploaded'];
     dateUploadedUnix = json['date_uploaded_unix'];
   }
-  int? id;
+  num? id;
   String? url;
   String? imdbCode;
   String? title;

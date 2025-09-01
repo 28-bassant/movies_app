@@ -25,11 +25,9 @@ class _WatchSectionState extends State<WatchSection> {
     if (urlString.isEmpty) return;
 
     final Uri url = Uri.parse(urlString);
-
-    // Use launchUrl with external application mode
     if (!await launchUrl(
       url,
-      mode: LaunchMode.externalApplication, // important for opening in browser
+      mode: LaunchMode.externalApplication,
     )) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Could not launch $url")),

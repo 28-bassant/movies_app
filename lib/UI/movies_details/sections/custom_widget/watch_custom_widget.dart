@@ -13,7 +13,7 @@ class WatchCustomWidget extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: width * .06,
+        horizontal: width * .04,
         vertical: height * .01
       ),
       decoration: BoxDecoration(
@@ -24,7 +24,7 @@ class WatchCustomWidget extends StatelessWidget {
       child: Row(
         children: [
           Image(image: AssetImage(image)),
-          SizedBox(width: width * .04,),
+          SizedBox(width: width * .02,),
           Text('$text',style: AppStyles.bold24White,)
         ],
       ),

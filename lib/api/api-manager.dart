@@ -148,7 +148,7 @@ class ApiManager {
     }
   }
 
-  static Future<MovieDetailsResponse?> getMovieDetailsByMovieId(int movieId) async {
+  static Future<MovieDetailsResponse?> getMovieDetailsByMovieId(num movieId) async {
     Uri url = Uri.https(
       ApiConstants.movieDetailsBaseUrl,
       ApiEndpoints.movieDetails,
@@ -166,24 +166,6 @@ class ApiManager {
       return MovieDetailsResponse.fromJson(json);
     } catch (e) {
       throw e;
-    }
-  }
-  static Future<MovieSuggestionsResponse?> getMovieSuggestionsByMovieId(int movieId) async {
-    Uri url = Uri.https(
-      ApiConstants.movieDetailsBaseUrl,
-      ApiEndpoints.movieSuggestions,
-      {
-        'movie_id': movieId.toString(),
-      },
-    );
-
-    try {
-      var response = await http.get(url);
-      var responseBody = response.body;
-      var json = jsonDecode(responseBody);
-      return MovieSuggestionsResponse.fromJson(json);
-    } catch (e) {
-      throw Exception("Error while fetching suggestions: $e");
     }
   }
 

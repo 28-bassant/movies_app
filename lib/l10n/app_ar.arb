@@ -54,20 +54,16 @@
   "new_password": "كلمة المرور الجديدة",
   "update_password": "تحديث كلمة المرور ",
   "something_went_wrong": "حدث خطأ ما",
-    "try_again": "حاول مجددا",
-          "cast": "الممثلين",
-          "summary": "الملخص",
-          "name": "الاسم",
-          "character": "الشخصية",
-          "no_description":"لا يوجد وصف متاح",
- feature/similar_genres
-          "similar" : "الافلام المشايهة",
-          "genres" : "التصنيف"
-
-
-          "no_movies": "لا يوجد افلام",
-          "search_movies": "البحث عن الافلام"
-develop
+  "try_again": "حاول مجددا",
+  "cast": "الممثلين",
+  "summary": "الملخص",
+  "name": "الاسم",
+  "character": "الشخصية",
+  "no_description":"لا يوجد وصف متاح",
+  "similar" : "الافلام المشايهة",
+  "genres" : "التصنيف",
+  "no_movies": "لا يوجد افلام",
+  "search_movies": "البحث عن الافلام"
 
 
 
