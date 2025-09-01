@@ -4,4 +4,5 @@ class ApiEndpoints{
   static const String movies = "/movies";
   static const String profile = "/profile";
   static const String movieDetails = "/api/v2/movie_details.json";
+  static const String movieSuggestions = "/api/v2/movie_suggestions.json";
 }

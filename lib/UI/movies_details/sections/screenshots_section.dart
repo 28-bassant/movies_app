@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter/material.dart';
 import 'package:movies_app/UI/movies_details/sections/custom_widget/screenshot_custom_widget.dart';
 import 'package:movies_app/l10n/app_localizations.dart';

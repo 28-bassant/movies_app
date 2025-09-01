@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:movies_app/api/api-endpoints.dart';
+import 'package:movies_app/model/movie_suggestions_response.dart';
 import 'package:movies_app/model/register_response.dart';
 import '../app-prefrences/token-storage.dart';
 import '../model/login-response.dart';
@@ -167,4 +168,23 @@ class ApiManager {
       throw e;
     }
   }
+  static Future<MovieSuggestionsResponse?> getMovieSuggestionsByMovieId(int movieId) async {
+    Uri url = Uri.https(
+      ApiConstants.movieDetailsBaseUrl,
+      ApiEndpoints.movieSuggestions,
+      {
+        'movie_id': movieId.toString(),
+      },
+    );
+
+    try {
+      var response = await http.get(url);
+      var responseBody = response.body;
+      var json = jsonDecode(responseBody);
+      return MovieSuggestionsResponse.fromJson(json);
+    } catch (e) {
+      throw Exception("Error while fetching suggestions: $e");
+    }
+  }
+
 }

@@ -24,7 +24,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get screenShots => 'لقطات الشاشة';
 
   @override
-  String get similar => 'مشابه';
+  String get similar => 'الافلام المشايهة';
 
   @override
   String get summary => 'الملخص';
@@ -33,7 +33,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cast => 'الممثلين';
 
   @override
-  String get genres => 'الأنواع';
+  String get genres => 'التصنيف';
 
   @override
   String get email => 'البريد الإلكتروني';

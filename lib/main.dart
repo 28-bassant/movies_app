@@ -45,7 +45,11 @@ class MyApp extends StatelessWidget {
         AppRoutes.updateRouteName: (context) => UpdateScreen(),
         AppRoutes.homeScreendRouteName: (context) => HomeScreen(),
         AppRoutes.resetPasswordRouteName: (context) => ResetPasswordScreen(),
-        AppRoutes.movieDetailsScreenRouteName: (context) => MoviesDetailsScreen(),
+        AppRoutes.movieDetailsScreenRouteName: (context) {
+          final movieId = ModalRoute.of(context)!.settings.arguments as int;
+          return MoviesDetailsScreen(movieId: movieId);
+        },
+
 
       },
       locale: Locale(languageProvider.appLanguage),

@@ -118,4 +118,9 @@ static TextStyle bold20Yellow = GoogleFonts.roboto(
     fontSize: 20,
     fontWeight: FontWeight.bold
 );
+static TextStyle bold12White = GoogleFonts.roboto(
+    color: AppColors.whiteColor,
+    fontSize: 12,
+    fontWeight: FontWeight.bold
+);
 }
