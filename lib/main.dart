@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
     var languageProvider = Provider.of<LanguageProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.homeScreendRouteName,
+      initialRoute: AppRoutes.loginRouteName,
       routes: {
         AppRoutes.onBoardingRouteName: (context) => OnboardingScreen(),
         AppRoutes.loginRouteName: (context) => LoginScreen(),
