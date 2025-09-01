@@ -1,14 +1,12 @@
 import 'dart:io';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
 import '../../../api/api-manager.dart';
-import '../../../app-prefrences/token-storage.dart';
-import '../../../app-prefrences/user_storage.dart';
 import '../../../providers/app-language-provider.dart';
 import '../../../providers/user_provider.dart';
 import '../../../utils/app_assets.dart';
@@ -36,9 +34,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool obscure = true;
 
-// final GoogleSignIn googleSignIn = GoogleSignIn(
-//     scopes: ['email'],
-//   );
+ final GoogleSignIn googleSignIn = GoogleSignIn(
+     scopes: ['email'],
+   );
+
 
 
   @override
@@ -387,37 +386,42 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // Future loginWithGoogle(BuildContext context) async {
-  //   try {
-  //     final account = await googleSignIn.signIn();
-  //     if (account != null) {
-  //       DialogUtils.showMsg(
-  //         context: context,
-  //         title: "Success",
-  //         msg: "Welcome, ${account.displayName}",
-  //         posActionName: "OK",
-  //         posAction: () {
-  //           // TODO: Navigate to home
-  //         },
-  //       );
-  //       debugPrint("User Email: ${account.email}");
-  //       debugPrint("User Name: ${account.displayName}");
-  //       debugPrint("User ID: ${account.id}");
-  //     } else {
-  //       DialogUtils.showMsg(
-  //         context: context,
-  //         title: "Cancelled",
-  //         msg: "Google login was cancelled",
-  //         posActionName: "OK",
-  //       );
-  //     }
-  //   } catch (e) {
-  //     DialogUtils.showMsg(
-  //       context: context,
-  //       title: "Error",
-  //       msg: "Google login failed: $e",
-  //       posActionName: "OK",
-  //     );
-  //   }
-  // }
+   Future loginWithGoogle(BuildContext context) async {
+     try {
+       final account = await googleSignIn.signIn();
+      if (account != null) {
+         DialogUtils.showMsg(
+           context: context,
+          title: "Success",
+         msg: "Welcome, ${account.displayName}",
+           posActionName: "OK",
+           posAction: () {
+             // TODO: Navigate to home
+        Navigator.pushNamedAndRemoveUntil(
+              context,
+            AppRoutes.homeScreendRouteName,
+        (route) => false,
+  );
+           },
+         );
+         debugPrint("User Email: ${account.email}");
+         debugPrint("User Name: ${account.displayName}");
+         debugPrint("User ID: ${account.id}");
+       } else {
+         DialogUtils.showMsg(
+           context: context,
+           title: "Cancelled",
+           msg: "Google login was cancelled",
+           posActionName: "OK",
+         );
+       }
+     } catch (e) {
+       DialogUtils.showMsg(
+         context: context,
+         title: "Error",
+         msg: "Google login failed: $e",
+         posActionName: "OK",
+       );
+     }
+   }
 }

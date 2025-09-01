@@ -63,13 +63,12 @@
       "name": "Name",
       "character": "Character",
       "no_description": "No description available",
-< feature/similar_genres
       "similar" : "Similar",
-      "genres" : "Genres"
+      "genres" : "Genres",
 
 
       "no_movies": "No Movies Found",
       "search_movies": "Search For Movies"
- develop
+
 
 }

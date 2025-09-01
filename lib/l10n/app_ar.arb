@@ -60,14 +60,12 @@
           "name": "الاسم",
           "character": "الشخصية",
           "no_description":"لا يوجد وصف متاح",
- feature/similar_genres
           "similar" : "الافلام المشايهة",
-          "genres" : "التصنيف"
+          "genres" : "التصنيف",
 
 
           "no_movies": "لا يوجد افلام",
           "search_movies": "البحث عن الافلام"
-develop
 
 
 
