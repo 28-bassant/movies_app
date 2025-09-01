@@ -18,17 +18,31 @@ class ApiManager {
     );
 
     print('AUTH ===> ${response.body}');
-
     final responseData = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
       await TokenStorage.saveToken(responseData['data']);
       return LoginResponse.fromJson(responseData);
     } else {
-      throw Exception(responseData["message"] ?? "Login failed, try again.");
+      var rawMessage = responseData["message"];
+
+      String errorMessage;
+      if (rawMessage is List) {
+        errorMessage = rawMessage.join(", ");
+      } else if (rawMessage is String) {
+        errorMessage = rawMessage;
+      } else {
+        errorMessage = "Login failed, try again.";
+      }
+      if (errorMessage.contains("must be strong")) {
+        errorMessage = "Password is incorrect";
+      } else if (errorMessage.contains("not found")) {
+        errorMessage = "User not found";
+      }
+
+      throw Exception(errorMessage);
     }
   }
-
   static Future<void> restPassword(
       String newPassword, String confirmPassword) async {}
 
