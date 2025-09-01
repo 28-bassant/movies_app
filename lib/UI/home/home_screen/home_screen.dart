@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/UI/home/taps/home-tap/home_tab.dart';
 import 'package:movies_app/UI/home/taps/prowse-tap/browse_tab.dart';
+import 'package:movies_app/UI/home/taps/search-tap/cubit/search-view-model.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/user_provider.dart';
 import '../../../utils/app_assets.dart';
@@ -16,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Widget> taps = [HomeTab(), SearchTap(), BrowseTab(), ProfileTap()];
+  List<Widget> taps = [HomeTab(),BlocProvider(create: (context) => SearchViewModel(),child:SearchTap()) , BrowseTab(), ProfileTap()];
   int selectedIndex = 0;
 
   @override
