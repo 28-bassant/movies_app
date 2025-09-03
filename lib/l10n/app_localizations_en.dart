@@ -184,4 +184,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get search_movies => 'Search For Movies';
+
+  @override
+  String get movie_added_to_favourite_successfully =>
+      'Movie added to favourite successfully';
+
+  @override
+  String get movie_removed_from_favourite_successfully =>
+      'Movie removed from favourite successfully ';
 }

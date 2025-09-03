@@ -63,7 +63,10 @@
   "similar" : "الافلام المشايهة",
   "genres" : "التصنيف",
   "no_movies": "لا يوجد افلام",
-  "search_movies": "البحث عن الافلام"
+  "search_movies": "البحث عن الافلام",
+  "movie_added_to_favourite_successfully": "تمت إضافة الفيلم إلى المفضلة بنجاح",
+  "movie_removed_from_favourite_successfully": "تمت إزالة الفيلم من المفضلة بنجاح"
+
 
 
 }

@@ -66,6 +66,8 @@
   "similar" : "Similar",
   "genres" : "Genres",
   "no_movies": "No Movies Found",
-  "search_movies": "Search For Movies"
+  "search_movies": "Search For Movies",
+  "movie_added_to_favourite_successfully": "Movie added to favourite successfully",
+  "movie_removed_from_favourite_successfully": "Movie removed from favourite successfully "
 
 }
