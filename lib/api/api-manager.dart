@@ -29,8 +29,43 @@ class ApiManager {
     }
   }
 
-  static Future<void> restPassword(
-      String newPassword, String confirmPassword) async {}
+  static Future<void> resetPassword({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    final url = Uri.parse(
+      "${ApiConstants.baseUrl}${ApiEndpoints.resetPassword}",
+    );
+
+    try {
+      final token = await TokenStorage.getToken();
+      final response = await http.patch(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        },
+        body: jsonEncode({
+          "oldPassword": oldPassword,
+          "newPassword": newPassword,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        print("Password reset successful");
+        print("Response: ${response.body}");
+      } else {
+        print(" Failed to reset password: ${response.statusCode}");
+        print("Error: ${response.body}");
+        final body = jsonDecode(response.body) as Map<String, dynamic>;
+        final errorMessage = body['message'][0];
+        throw errorMessage;
+      }
+    } catch (e) {
+      print(" Exception: $e");
+      rethrow;
+    }
+  }
 
   static Future<UserData> fetchProfile(String token) async {
     Uri url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.profile}");
@@ -43,14 +78,14 @@ class ApiManager {
     );
 
     print('PROFILE ===> ${response.body}');
-
     final responseData = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
       return UserData.fromJson(responseData['data']);
     } else {
       throw Exception(
-          responseData["message"] ?? "Failed to load profile data.");
+        responseData["message"] ?? "Failed to load profile data.",
+      );
     }
   }
 
@@ -93,7 +128,10 @@ class ApiManager {
   }
 
   static Future<void> updateProfile(
-      String? name, String? phone, int? avaterId) async {
+    String? name,
+    String? phone,
+    int? avaterId,
+  ) async {
     final Uri url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.profile}");
     final updatedValues = <String, dynamic>{};
     if (name != null) updatedValues['name'] = name;
@@ -148,7 +186,9 @@ class ApiManager {
     }
   }
 
-  static Future<MovieDetailsResponse?> getMovieDetailsByMovieId(int movieId) async {
+  static Future<MovieDetailsResponse?> getMovieDetailsByMovieId(
+    int movieId,
+  ) async {
     Uri url = Uri.https(
       ApiConstants.movieDetailsBaseUrl,
       ApiEndpoints.movieDetails,
@@ -168,13 +208,14 @@ class ApiManager {
       throw e;
     }
   }
-  static Future<MovieSuggestionsResponse?> getMovieSuggestionsByMovieId(int movieId) async {
+
+  static Future<MovieSuggestionsResponse?> getMovieSuggestionsByMovieId(
+    int movieId,
+  ) async {
     Uri url = Uri.https(
       ApiConstants.movieDetailsBaseUrl,
       ApiEndpoints.movieSuggestions,
-      {
-        'movie_id': movieId.toString(),
-      },
+      {'movie_id': movieId.toString()},
     );
 
     try {
@@ -186,5 +227,4 @@ class ApiManager {
       throw Exception("Error while fetching suggestions: $e");
     }
   }
-
 }

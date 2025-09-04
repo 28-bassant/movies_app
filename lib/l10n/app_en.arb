@@ -68,7 +68,8 @@
 
 
       "no_movies": "No Movies Found",
-      "search_movies": "Search For Movies"
+      "search_movies": "Search For Movies",
+  "old_password": "Current Password"
 
 
 }

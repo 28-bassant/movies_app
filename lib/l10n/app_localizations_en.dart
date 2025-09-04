@@ -184,4 +184,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get search_movies => 'Search For Movies';
+
+  @override
+  String get old_password => 'Current Password';
 }

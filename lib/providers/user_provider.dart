@@ -4,9 +4,12 @@ import 'package:movies_app/app-prefrences/token-storage.dart';
 
 import '../app-prefrences/user_storage.dart';
 import '../model/register_response.dart';
+
 class UserProvider with ChangeNotifier {
   UserData? _user;
+
   UserData? get user => _user;
+
   bool get isLoggedIn => _user != null;
 
   void setUserIfExists(UserData? user) {
@@ -32,14 +35,27 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateUser(UserData user)async{
-   try {
-      await ApiManager.updateProfile(user.name, user.phone, user.avaterId );
+  Future<void> updateUser(UserData user) async {
+    try {
+      await ApiManager.updateProfile(user.name, user.phone, user.avaterId);
       setUser(user);
+    } catch (e) {
+      rethrow;
     }
-    catch(e){
-     rethrow;
+  }
+
+  Future<void> resetPassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    try {
+      await ApiManager.resetPassword(
+        oldPassword: currentPassword,
+        newPassword: newPassword,
+      );
+      notifyListeners();
+    } catch (_) {
+      rethrow;
     }
   }
 }
-

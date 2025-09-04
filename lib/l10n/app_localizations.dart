@@ -451,6 +451,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search For Movies'**
   String get search_movies;
+
+  /// No description provided for @old_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Password'**
+  String get old_password;
 }
 
 class _AppLocalizationsDelegate

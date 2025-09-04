@@ -184,4 +184,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get search_movies => 'البحث عن الافلام';
+
+  @override
+  String get old_password => 'كلمة المرور الحالية';
 }

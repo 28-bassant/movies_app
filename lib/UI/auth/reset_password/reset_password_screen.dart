@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/api/api-manager.dart';
+import 'package:provider/provider.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../providers/user_provider.dart';
 import '../../../utils/app_assets.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_routes.dart';
@@ -17,15 +20,21 @@ class ResetPasswordScreen extends StatefulWidget {
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   var formKey = GlobalKey<FormState>();
 
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
+  final currentPasswordController = TextEditingController();
+  final newPasswordController = TextEditingController();
 
   bool obscure = true;
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    var width = MediaQuery
+        .of(context)
+        .size
+        .width;
     return Scaffold(
       backgroundColor: AppColors.blackBgColor,
       appBar: AppBar(
@@ -42,9 +51,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
-                child: Image.asset("assets/images/forgotPassword.png"),
-              ),
+              SizedBox(child: Image.asset("assets/images/forgotPassword.png")),
               Form(
                 key: formKey,
                 child: Column(
@@ -52,15 +59,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   children: [
                     SizedBox(height: height * .02),
                     CustomTextFormField(
-                      hintText: AppLocalizations.of(context)!.new_password,
-                      controller: passwordController,
+                      hintText: AppLocalizations.of(context)!.old_password,
+                      controller: currentPasswordController,
                       keyboardType: TextInputType.visiblePassword,
                       validator: (text) {
-                        if (text == null || text.trim().isEmpty) {
+                        if (text == null || text
+                            .trim()
+                            .isEmpty) {
                           return AppLocalizations.of(
                             context,
-                          )!
-                              .please_enter_password;
+                          )!.please_enter_password;
                         }
                         if (text.length < 6) {
                           return AppLocalizations.of(context)!.valid_password;
@@ -83,15 +91,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     ),
                     SizedBox(height: height * .02),
                     CustomTextFormField(
-                      hintText: AppLocalizations.of(context)!.confirmPassword,
-                      controller: confirmPasswordController,
+                      hintText: AppLocalizations.of(context)!.new_password,
+                      controller: newPasswordController,
                       keyboardType: TextInputType.visiblePassword,
                       validator: (text) {
-                        if (text == null || text.trim().isEmpty) {
+                        if (text == null || text
+                            .trim()
+                            .isEmpty) {
                           return AppLocalizations.of(
                             context,
-                          )!
-                              .please_confirm_password;
+                          )!.please_confirm_password;
                         }
                         if (text.length < 6) {
                           return AppLocalizations.of(context)!.valid_password;
@@ -115,8 +124,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     SizedBox(height: height * .05),
                     CustomElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(
-                            context, AppRoutes.homeScreendRouteName);
+                        resetPassword();
+
                       },
                       colorSide: AppColors.transparentColor,
                       textStyle: AppStyles.regular20Black,
@@ -131,4 +140,28 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       ),
     );
   }
+
+  void resetPassword() async {
+    if (formKey.currentState?.validate() != true) return;
+    try {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+      await userProvider.resetPassword(
+        currentPassword: currentPasswordController.text,
+        newPassword: newPasswordController.text,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Password updated successfully ")),
+      );
+      Navigator.pushNamed(
+        context,
+        AppRoutes.homeScreendRouteName,
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString())),
+      );
+    }
+  }
+
 }

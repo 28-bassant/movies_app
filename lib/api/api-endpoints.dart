@@ -5,4 +5,6 @@ class ApiEndpoints{
   static const String profile = "/profile";
   static const String movieDetails = "/api/v2/movie_details.json";
   static const String movieSuggestions = "/api/v2/movie_suggestions.json";
+  static const String resetPassword = '/auth/reset-password';
+
 }
