@@ -7,7 +7,7 @@ import '../../../utils/app_styles.dart';
 import '../movies_details_screen.dart';
 
 class SimilarMoviesSection extends StatefulWidget {
-  final int movieId;
+  final num movieId;
 
   const SimilarMoviesSection({super.key, required this.movieId});
 
@@ -72,7 +72,7 @@ class _SimilarMoviesSectionState extends State<SimilarMoviesSection> {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            mainAxisSpacing: 8,
+            mainAxisSpacing: 10,
             crossAxisSpacing: 14,
             childAspectRatio: 0.85,
           ),
@@ -91,47 +91,47 @@ class _SimilarMoviesSectionState extends State<SimilarMoviesSection> {
             child:  Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Stack(
-                    children: [
-                      Image.network(
-                        movie['medium_cover_image'],
-                        height: height * 0.25,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) => Container(
-                          height: height * 0.25,
-                          color: Colors.grey.shade800,
-                          child: const Icon(Icons.broken_image, color: AppColors.whiteColor),
-                        ),
-                      ),
-                      Positioned(
-                        top: 8,
-                        left: 8,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-                          decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.6),
-                            borderRadius: BorderRadius.circular(8),
+                Expanded(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Stack(
+                      children: [
+                        Image.network(
+                          movie['medium_cover_image'],
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) => Container(
+                            color: Colors.grey.shade800,
+                            child: const Icon(Icons.broken_image, color: AppColors.whiteColor),
                           ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                "${movie['rating'] ?? 'N/A'}",
-                                style: AppStyles.bold12White,
-                              ),
-                               SizedBox(width:width*0.02 ),
-                              const Icon(Icons.star, color:AppColors.yellowColor , size: 16),
+                        ),
+                        Positioned(
+                          top: 8,
+                          left: 8,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.6),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  "${movie['rating'] ?? 'N/A'}",
+                                  style: AppStyles.bold12White,
+                                ),
+                                 SizedBox(width:width*0.02 ),
+                                const Icon(Icons.star, color:AppColors.yellowColor , size: 16),
 
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+
                   ),
-
                 ),
               ],
             ));

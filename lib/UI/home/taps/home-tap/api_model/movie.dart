@@ -4,7 +4,7 @@ class Movie {
   final String image;
   final double rating;
   final List<String> genres;
-  int? id;
+  num? id;
 
   Movie({
     required this.title,

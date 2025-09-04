@@ -452,11 +452,25 @@ abstract class AppLocalizations {
   /// **'Search For Movies'**
   String get search_movies;
 
+
   /// No description provided for @old_password.
   ///
   /// In en, this message translates to:
   /// **'Current Password'**
   String get old_password;
+
+  /// No description provided for @movie_added_to_favourite_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Movie added to favourite successfully'**
+  String get movie_added_to_favourite_successfully;
+
+  /// No description provided for @movie_removed_from_favourite_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Movie removed from favourite successfully '**
+  String get movie_removed_from_favourite_successfully;
+
 }
 
 class _AppLocalizationsDelegate

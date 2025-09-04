@@ -67,7 +67,7 @@ class _MoviesCarouselState extends State<MoviesCarousel> {
                  // todo: Navigate to details screen
                   Navigator.pushNamed(
                     context, AppRoutes.movieDetailsScreenRouteName,
-                  arguments: movie.id);
+                    arguments: movie.id);
                 },
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 400),

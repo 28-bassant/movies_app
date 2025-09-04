@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:movies_app/api/api-endpoints.dart';
-import 'package:movies_app/model/movie_suggestions_response.dart';
 import 'package:movies_app/model/register_response.dart';
 import '../app-prefrences/token-storage.dart';
+import '../model/favourite_movies.dart';
 import '../model/login-response.dart';
 import '../model/movie_details_response.dart';
+import '../utils/app_colors.dart';
+import '../utils/toast_utils.dart';
 import 'api-constant.dart';
 
 class ApiManager {
@@ -18,14 +20,29 @@ class ApiManager {
     );
 
     print('AUTH ===> ${response.body}');
-
     final responseData = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
       await TokenStorage.saveToken(responseData['data']);
       return LoginResponse.fromJson(responseData);
     } else {
-      throw Exception(responseData["message"] ?? "Login failed, try again.");
+      var rawMessage = responseData["message"];
+
+      String errorMessage;
+      if (rawMessage is List) {
+        errorMessage = rawMessage.join(", ");
+      } else if (rawMessage is String) {
+        errorMessage = rawMessage;
+      } else {
+        errorMessage = "Login failed, try again.";
+      }
+      if (errorMessage.contains("must be strong")) {
+        errorMessage = "Password is incorrect";
+      } else if (errorMessage.contains("not found")) {
+        errorMessage = "User not found";
+      }
+
+      throw Exception(errorMessage);
     }
   }
 
@@ -89,14 +106,12 @@ class ApiManager {
     }
   }
 
-  static Future<RegisterResponse> register(
-    String email,
-    String name,
-    String password,
-    String confirmPassword,
-    String phone,
-    int avaterId,
-  ) async {
+  static Future<RegisterResponse> register(String email,
+      String name,
+      String password,
+      String confirmPassword,
+      String phone,
+      int avaterId,) async {
     Uri url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.register}");
 
     var data = {
@@ -127,11 +142,8 @@ class ApiManager {
     }
   }
 
-  static Future<void> updateProfile(
-    String? name,
-    String? phone,
-    int? avaterId,
-  ) async {
+  static Future<void> updateProfile(String? name, String? phone,
+      int? avaterId) async {
     final Uri url = Uri.parse("${ApiConstants.baseUrl}${ApiEndpoints.profile}");
     final updatedValues = <String, dynamic>{};
     if (name != null) updatedValues['name'] = name;
@@ -187,8 +199,7 @@ class ApiManager {
   }
 
   static Future<MovieDetailsResponse?> getMovieDetailsByMovieId(
-    int movieId,
-  ) async {
+      num movieId) async {
     Uri url = Uri.https(
       ApiConstants.movieDetailsBaseUrl,
       ApiEndpoints.movieDetails,
@@ -208,23 +219,180 @@ class ApiManager {
       throw e;
     }
   }
+  
+  static List<MovieDetails> favouriteMoviesList = [];
 
-  static Future<MovieSuggestionsResponse?> getMovieSuggestionsByMovieId(
-    int movieId,
-  ) async {
+  static Future<void> addMovieToFavourite(MovieDetails movieDetails) async {
+    Uri url = Uri.https(ApiConstants.BaseUrl, ApiEndpoints.addMovieToFavourite);
+
+    try {
+      final token = await TokenStorage.getToken();
+
+      if (token == null) {
+        print("No token found. Please login first.");
+        return;
+      }
+
+      print("📡 Sending add favorite request for ${movieDetails.title}");
+
+      var response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode({
+          'movieId': movieDetails.id.toString(),
+          'name': movieDetails.title,
+          'rating': movieDetails.rating,
+          'imageURL': movieDetails.url,
+          'year': movieDetails.year.toString(),
+        }),
+      );
+
+      print("StatusCode: ${response.statusCode}, Body: ${response.body}");
+      var json = jsonDecode(response.body);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        favouriteMoviesList.add(movieDetails);
+        ToastUtils.ShowToast(
+            msg: "Movie added to wishlist successfully",
+            bgColor: AppColors.orangeColor,
+            textColor: AppColors.whiteColor);
+      }
+      else {
+        ToastUtils.ShowToast(
+            msg: " Failed: ${json['message'] ?? 'Unknown error'}",
+            bgColor: AppColors.orangeColor,
+            textColor: AppColors.whiteColor);
+      }
+    } catch (e) {
+      ToastUtils.ShowToast(
+          msg: "Error adding to favorites: $e",
+          bgColor: AppColors.orangeColor,
+          textColor: AppColors.whiteColor);
+    }
+  }
+
+
+  static Future<void> removeMovieFromFavourite(int movieId) async {
     Uri url = Uri.https(
-      ApiConstants.movieDetailsBaseUrl,
-      ApiEndpoints.movieSuggestions,
-      {'movie_id': movieId.toString()},
+      ApiConstants.BaseUrl,
+      "${ApiEndpoints.removeMovieFromFavourite}/$movieId",
     );
 
     try {
-      var response = await http.get(url);
-      var responseBody = response.body;
-      var json = jsonDecode(responseBody);
-      return MovieSuggestionsResponse.fromJson(json);
+      final token = await TokenStorage.getToken();
+
+      if (token == null) {
+        print("No token found. Please login first.");
+        return;
+      }
+
+      var response = await http.delete(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      print("Status: ${response.statusCode}, Body: ${response.body}");
+
+      if (response.statusCode == 200) {
+        ToastUtils.ShowToast(
+            msg: " Movie removed from wishlist successfully",
+            bgColor: AppColors.orangeColor,
+            textColor: AppColors.whiteColor);
+      } else {
+        await ToastUtils.ShowToast(
+            msg: "Failed to remove movie. Status: ${response.statusCode}",
+            bgColor: AppColors.orangeColor,
+            textColor: AppColors.whiteColor);
+      }
     } catch (e) {
-      throw Exception("Error while fetching suggestions: $e");
+      await ToastUtils.ShowToast(
+          msg: "Exception while removing movie: $e",
+          bgColor: AppColors.orangeColor,
+          textColor: AppColors.whiteColor);
     }
   }
+
+  static Future<bool> isFavourite(int movieId) async {
+    Uri url = Uri.https(
+      ApiConstants.BaseUrl,
+      "${ApiEndpoints.isFavourite}/$movieId",
+    );
+
+    try {
+      final token = await TokenStorage.getToken();
+
+      if (token == null) {
+        print("No token found. Please login first.");
+        return false;
+      }
+
+      var response = await http.get(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        var jsonResponse = jsonDecode(response.body);
+
+        if (jsonResponse.containsKey("data")) {
+          return jsonResponse["data"] as bool;
+        } else {
+          print("Response does not contain 'data' field.");
+          return false;
+        }
+      } else {
+        print(
+            "Failed to fetch favourite status. Status: ${response.statusCode}");
+        return false;
+      }
+    } catch (e) {
+      print("Exception while checking favourite: $e");
+      return false;
+    }
+  }
+
+
+  static Future<List<FavouriteMovies>> getAllFavouriteMovies() async {
+    Uri url = Uri.https(ApiConstants.BaseUrl, ApiEndpoints.getAllFavouriteMovies);
+
+    try {
+      final token = await TokenStorage.getToken();
+      if (token == null) return [];
+
+      var response = await http.get(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      print("Response body: ${response.body}");
+
+      if (response.statusCode == 200) {
+        var jsonResponse = jsonDecode(response.body);
+        List<dynamic> data = jsonResponse['data'] ?? [];
+
+        return data.map((json) => FavouriteMovies.fromJson(json)).toList();
+      } else {
+        print("Failed to fetch favorites: ${response.statusCode}");
+        return [];
+      }
+    } catch (e) {
+      print("Exception while fetching favorites: $e");
+      return [];
+    }
+  }
+
+
+
 }

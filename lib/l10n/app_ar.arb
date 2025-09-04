@@ -54,6 +54,7 @@
   "new_password": "كلمة المرور الجديدة",
   "update_password": "تحديث كلمة المرور ",
   "something_went_wrong": "حدث خطأ ما",
+
     "try_again": "حاول مجددا",
           "cast": "الممثلين",
           "summary": "الملخص",
@@ -66,7 +67,21 @@
 
           "no_movies": "لا يوجد افلام",
           "search_movies": "البحث عن الافلام",
-  "old_password": "كلمة المرور الحالية"
+  "old_password": "كلمة المرور الحالية",
+
+  "try_again": "حاول مجددا",
+  "cast": "الممثلين",
+  "summary": "الملخص",
+  "name": "الاسم",
+  "character": "الشخصية",
+  "no_description":"لا يوجد وصف متاح",
+  "similar" : "الافلام المشايهة",
+  "genres" : "التصنيف",
+  "no_movies": "لا يوجد افلام",
+  "search_movies": "البحث عن الافلام",
+  "movie_added_to_favourite_successfully": "تمت إضافة الفيلم إلى المفضلة بنجاح",
+  "movie_removed_from_favourite_successfully": "تمت إزالة الفيلم من المفضلة بنجاح"
+
 
 
 
