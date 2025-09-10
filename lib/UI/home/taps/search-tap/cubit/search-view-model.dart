@@ -50,7 +50,8 @@ class SearchViewModel extends Cubit<SearchState> {
     }
     emit(SearchLoading());
     try {
-      //final movies = await MovieService.fetchMovies(query: query);
+      ///todo: replace _movies with movies
+      final movies = await MovieService.fetchMovies(query: query);
       if (_movies.isEmpty) {
         emit(SearchEmpty());
       } else {
