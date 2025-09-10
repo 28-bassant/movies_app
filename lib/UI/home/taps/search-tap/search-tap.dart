@@ -49,7 +49,7 @@ class _SearchTapState extends State<SearchTap> {
                 prefixIcon: Image(image: AssetImage(AppAssets.searchIcon,))
                 ,controller: searchController ,
                 onChanged: (value) {
-                  context.read<SearchViewModel>().searchMovies(value);
+                  context.read<SearchViewModel>().searchMovies(query: value);
                 },
               ),
               SizedBox(height: height * .02),

@@ -452,7 +452,6 @@ abstract class AppLocalizations {
   /// **'Search For Movies'**
   String get search_movies;
 
-
   /// No description provided for @old_password.
   ///
   /// In en, this message translates to:
@@ -470,7 +469,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Movie removed from favourite successfully '**
   String get movie_removed_from_favourite_successfully;
-
 }
 
 class _AppLocalizationsDelegate
