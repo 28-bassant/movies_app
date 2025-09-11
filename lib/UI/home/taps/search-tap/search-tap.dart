@@ -49,7 +49,7 @@ class _SearchTapState extends State<SearchTap> {
                 prefixIcon: Image(image: AssetImage(AppAssets.searchIcon,))
                 ,controller: searchController ,
                 onChanged: (value) {
-                  context.read<SearchViewModel>().searchMovies(query: value);
+                  context.read<SearchViewModel>().searchMovies(value);
                 },
               ),
               SizedBox(height: height * .02),
@@ -87,11 +87,11 @@ class _SearchTapState extends State<SearchTap> {
                         itemCount: state.movies.length,
                         itemBuilder: (context, index) {
                           return GestureDetector(
-                            onTap: (){
-                              Navigator.pushNamed(context, AppRoutes.movieDetailsScreenRouteName,
-                                  arguments: state.movies[index].id);
+                              onTap: (){
+                                Navigator.pushNamed(context, AppRoutes.movieDetailsScreenRouteName,
+                                    arguments: state.movies[index].id);
 
-                            }, child:MovieGridItem(movie: state.movies[index]));
+                              }, child:MovieGridItem(movie: state.movies[index]));
                         },
                       );
                     }
