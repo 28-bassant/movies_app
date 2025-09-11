@@ -10,6 +10,9 @@ import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../api/api-manager.dart';
+import '../../../../model/favourite_movies.dart';
+import '../../../../model/movie_details_response.dart';
 import '../../../../providers/user_provider.dart';
 import '../../../auth/update/update_screen.dart';
 import 'history_tab.dart';
@@ -24,11 +27,40 @@ class ProfileTap extends StatefulWidget {
 class _ProfileTabState extends State<ProfileTap> {
   bool isWishList = true;
 
+  bool isLoading = true;
   @override
   void initState() {
     super.initState();
+    fetchFavouriteMovies();
   }
 
+  List<FavouriteMovies> favouriteMovies = [];
+
+  void fetchFavouriteMovies() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      List<FavouriteMovies> favs = await ApiManager.getAllFavouriteMovies();
+
+      for (var fav in favs) {
+        MovieDetailsResponse? response = await ApiManager.getMovieDetailsByMovieId(fav.id);
+
+        fav.imageURL = response?.data?.movie?.mediumCoverImage ?? '';
+      }
+
+      setState(() {
+        favouriteMovies = favs;
+        isLoading = false;
+      });
+    } catch (e) {
+      print("Error fetching favorite movies: $e");
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
@@ -68,7 +100,7 @@ class _ProfileTabState extends State<ProfileTap> {
                     ),
                     Column(
                       children: [
-                        Text('12', style: AppStyles.bold36White),
+                        Text('${favouriteMovies.length}', style: AppStyles.bold36White),
                         Text(
                           AppLocalizations.of(context)!.wishList,
                           style: AppStyles.bold24White,
@@ -209,7 +241,7 @@ class _ProfileTabState extends State<ProfileTap> {
           Expanded(
             child: Container(
               color: AppColors.blackBgColor,
-              child: isWishList ? WhishlistTab() : HistoryTab(),
+              child: isWishList ?WhishlistTab(onChanged: fetchFavouriteMovies): HistoryTab(),
             ),
           ),
         ],

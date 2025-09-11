@@ -11,8 +11,8 @@ import '../../../../model/favourite_movies.dart';
 import '../../../../model/movie_details_response.dart';
 
 class WhishlistTab extends StatefulWidget {
-  const WhishlistTab({super.key});
-
+  final VoidCallback? onChanged;
+  const WhishlistTab({super.key, this.onChanged});
   @override
   State<WhishlistTab> createState() => _WhishlistTabState();
 }
@@ -85,9 +85,11 @@ class _WhishlistTabState extends State<WhishlistTab> {
                 arguments: favouriteMovies[index].id,
               ).then((updated) {
                 if (updated == true) {
-                  fetchFavouriteMovies(); // refresh the wishlist
+                  fetchFavouriteMovies();
+                  widget.onChanged?.call();
                 }
               });
+
             },
             child: MovieWidget(
                 image: favouriteMovies[index].imageURL,
