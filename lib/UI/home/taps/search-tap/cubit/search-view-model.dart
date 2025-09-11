@@ -16,6 +16,7 @@ class SearchViewModel extends Cubit<SearchState> {
       year: '1998',
       rating: 5.0,
       genres: ['action'],
+      posterPath: ''
     ),
     Movie(
       id: 2,
@@ -24,6 +25,7 @@ class SearchViewModel extends Cubit<SearchState> {
       year: '1999',
       rating: 6.0,
       genres: ['action', 'comedy'],
+      posterPath: ''
     ),
     Movie(
       id: 3,
@@ -32,6 +34,7 @@ class SearchViewModel extends Cubit<SearchState> {
       year: '1999',
       rating: 5.0,
       genres: ['comedy'],
+      posterPath: ''
     ),
     Movie(
       id: 4,
@@ -40,6 +43,7 @@ class SearchViewModel extends Cubit<SearchState> {
       year: '2005',
       rating: 7.0,
       genres: ['adventure', 'drama'],
+      posterPath: ''
     ),
   ];
 

@@ -259,6 +259,9 @@ class _WatchSectionState extends State<WatchSection> {
       await FavouritesSharedPreference.removeFavourite(movieId);
       await ApiManager.removeMovieFromFavourite(movieId);
     }
+
+    Navigator.pop(context, true);
   }
+
 
 }
