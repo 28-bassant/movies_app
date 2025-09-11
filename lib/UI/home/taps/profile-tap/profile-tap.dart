@@ -12,7 +12,8 @@ import 'package:provider/provider.dart';
 
 import '../../../../providers/user_provider.dart';
 import '../../../auth/update/update_screen.dart';
-import 'history_tab.dart';
+import 'history_tab/history_service.dart';
+import 'history_tab/history_tab.dart';
 
 class ProfileTap extends StatefulWidget {
   const ProfileTap({super.key});
@@ -23,10 +24,19 @@ class ProfileTap extends StatefulWidget {
 
 class _ProfileTabState extends State<ProfileTap> {
   bool isWishList = true;
-
+  int historyCount = 0;
+  final historyService = HistoryService();
   @override
   void initState() {
     super.initState();
+    _loadHistoryCount();
+  }
+
+  Future<void> _loadHistoryCount() async {
+    final history = await historyService.getHistory();
+    setState(() {
+      historyCount = history.length;
+    });
   }
 
   @override
@@ -77,7 +87,8 @@ class _ProfileTabState extends State<ProfileTap> {
                     ),
                     Column(
                       children: [
-                        Text('10', style: AppStyles.bold36White),
+                        Text( historyCount.toString(),
+                            style: AppStyles.bold36White),
                         Text(
                           AppLocalizations.of(context)!.history,
                           style: AppStyles.bold24White,
