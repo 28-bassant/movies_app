@@ -10,13 +10,14 @@ import 'package:provider/provider.dart';
 import 'UI/auth/register/register_screen.dart';
 import 'UI/auth/reset_password/reset_password_screen.dart';
 import 'UI/home/home_screen/home_screen.dart';
+import 'UI/home/taps/home-tap/api_model/movie.dart';
 import 'UI/on_boarding/on_boarding_screen.dart';
 import 'l10n/app_localizations.dart';
-import 'package:movies_app/UI/home/taps/prowse-tap/browse_tab.dart';
 
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+
+Future<void> main()async {
+
   runApp(
     MultiProvider(
       providers: [
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
     var languageProvider = Provider.of<LanguageProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.loginRouteName,
+      initialRoute: AppRoutes.onBoardingRouteName,
       routes: {
         AppRoutes.onBoardingRouteName: (context) => OnboardingScreen(),
         AppRoutes.loginRouteName: (context) => LoginScreen(),

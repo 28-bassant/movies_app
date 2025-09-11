@@ -184,4 +184,15 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get search_movies => 'البحث عن الافلام';
+
+  @override
+  String get old_password => 'كلمة المرور الحالية';
+
+  @override
+  String get movie_added_to_favourite_successfully =>
+      'تمت إضافة الفيلم إلى المفضلة بنجاح';
+
+  @override
+  String get movie_removed_from_favourite_successfully =>
+      'تمت إزالة الفيلم من المفضلة بنجاح';
 }

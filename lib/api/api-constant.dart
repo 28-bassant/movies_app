@@ -15,5 +15,4 @@ class ApiConstants {
     AppAssets.updateAvatar9,
   ];
   static const String movieDetailsBaseUrl = 'yts.mx';
-
 }

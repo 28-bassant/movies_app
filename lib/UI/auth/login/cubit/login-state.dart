@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-
 import '../../../../model/register_response.dart';
 
 abstract class LoginState extends Equatable {

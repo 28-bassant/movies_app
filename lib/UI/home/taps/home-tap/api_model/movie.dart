@@ -2,6 +2,7 @@ class Movie {
   final String title;
   final String year;
   final String image;
+  final String posterPath;
   final double rating;
   final List<String> genres;
   num? id;
@@ -10,9 +11,10 @@ class Movie {
     required this.title,
     required this.year,
     required this.image,
+    required this.posterPath,
     required this.rating,
     required this.genres,
-    required this.id
+    required this.id,
   });
 
   factory Movie.fromJson(Map<String, dynamic> json) {
@@ -21,13 +23,16 @@ class Movie {
       extractedGenres = List<String>.from(json['genres']);
     }
 
+    final poster = json['medium_cover_image'] ?? "";
+
     return Movie(
       title: json['title'] ?? "No Title",
       year: json['year']?.toString() ?? "N/A",
-      image: json['medium_cover_image'] ?? "",
+      image: poster,
+      posterPath: poster,
       rating: (json['rating'] is num) ? (json['rating'] as num).toDouble() : 0.0,
       genres: extractedGenres,
-      id: json['id']
+      id: json['id'],
     );
   }
 }
