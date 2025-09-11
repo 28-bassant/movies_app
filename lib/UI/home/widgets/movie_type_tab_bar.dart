@@ -1,11 +1,12 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/utils/app_styles.dart';
 
 class MovieTypeTabBar extends StatefulWidget {
-  const MovieTypeTabBar({super.key});
+  final void Function(String category) onCategorySelected;
+
+  const MovieTypeTabBar({super.key, required this.onCategorySelected});
 
   @override
   State<MovieTypeTabBar> createState() => _MovieTypeTabBarState();
@@ -14,11 +15,28 @@ class MovieTypeTabBar extends StatefulWidget {
 class _MovieTypeTabBarState extends State<MovieTypeTabBar>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  final List<String> categoriesKeys = [
+    "action",
+    "adventure",
+    "comedy",
+    "horror",
+    "fantasy",
+    "drama",
+  ];
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 6, vsync: this);
+    _tabController = TabController(length: categoriesKeys.length, vsync: this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.onCategorySelected(categoriesKeys[0]);
+    });
+
+    _tabController.addListener(() {
+      if (!_tabController.indexIsChanging) {
+        widget.onCategorySelected(categoriesKeys[_tabController.index]);
+      }
+    });
   }
 
   @override

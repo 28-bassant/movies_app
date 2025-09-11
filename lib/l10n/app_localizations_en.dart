@@ -186,6 +186,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get search_movies => 'Search For Movies';
 
   @override
+  String get old_password => 'Current Password';
+
+  @override
   String get movie_added_to_favourite_successfully =>
       'Movie added to favourite successfully';
 
