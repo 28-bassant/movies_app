@@ -260,7 +260,6 @@ class _WatchSectionState extends State<WatchSection> {
       await ApiManager.removeMovieFromFavourite(movieId);
     }
 
-    Navigator.pop(context, true);
   }
 
 
